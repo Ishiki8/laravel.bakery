@@ -1,0 +1,69 @@
+:root {
+    --bg-color: white;
+    --text-color: dimgray;
+    --accent-color: orange;
+    --secondary-accent-color: #ffc14d;
+    --contrast-color: black;
+}
+
+/* =========================== General rules ============================= */
+
+html, body {
+    height: 100%;
+}
+
+body {
+    min-width: 320px;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+main.main {
+    flex: 1 1 auto;
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all .3s;
+}
+
+a:hover {
+    color: var(--accent-color);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.btn, .dropdown-menu {
+    border-radius: 7px;
+    transition: all .3s;
+}
+
+/* =========================== General rules ============================= */
+
+/* =========================== Header rules ============================= */
+
+.header-top .btn {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+}
+
+.header-top .btn:hover {
+    background-color: var(--secondary-accent-color);
+}
+
+.header-top-signbtns button {
+    margin-bottom: 4px;
+}
+
+/* =========================== Header rules ============================= */
