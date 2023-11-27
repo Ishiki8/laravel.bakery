@@ -19,8 +19,8 @@
                 <div class="col-6 col-sm-4">
                     <div class="d-flex justify-content-end">
                         <div class="header-top-signbtns">
-                            <button type="button" class="btn btn-sm">Вход</button>
-                            <button type="button" class="btn btn-sm">Регистрация</button>
+                            <a href="{{ asset('login') }}"><button type="button" class="btn btn-sm">Вход</button></a>
+                            <a href="{{ asset('registration') }}"><button type="button" class="btn btn-sm">Регистрация</button></a>
                         </div>
                     </div>
                 </div>
@@ -37,10 +37,12 @@
                 </div>
 
                 <div class="col-md-4 order-md-2 text-end d-none d-md-block">
-                    <button class="btn position-relative" type="button">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <span class="position-absolute top-0 start-50 badge rounded-pill bg-danger">3</span>
-                    </button>
+                    <a href="{{ asset('cart') }}">
+                        <button class="btn position-relative" type="button">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span class="position-absolute top-0 start-50 badge rounded-pill bg-danger">3</span>
+                        </button>
+                    </a>
                 </div>
 
                 <div class="col-md-4 col-sm-6 order-md-1 mt-2 mt-sm-0">

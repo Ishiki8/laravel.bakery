@@ -317,5 +317,62 @@ section {
     color: var(--text-color) !important;
 }
 
-
 /* ============================= Footer ============================ */
+
+/* ============================= Pagination ============================ */
+
+.page-link {
+    color: var(--contrast-color);
+    transition: all .3s;
+}
+
+.page-link:hover {
+    color: #fff;
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.active>.page-link,
+.page-link.active {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+/* ============================= Pagination ============================ */
+
+/* ============================= Product =============================== */
+
+.product-content .product-price {
+    font-size: 25px;
+}
+
+.product-content .input-group {
+    width: 250px;
+}
+
+.product-content .card i {
+    color: var(--accent-color);
+}
+
+.product-content .card {
+    padding-left: 20px;
+    font-size: 14px;
+}
+
+.product-content .card ul li::before {
+    content: "\f105";
+    font-weight: 900;
+    margin-right: 10px;
+}
+
+/* ============================= Product =============================== */
+
+/* ============================= Validation ============================= */
+
+label.required::before {
+    content: "* ";
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+/* ============================= Validation ============================= */

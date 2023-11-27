@@ -21,6 +21,8 @@
                     ])
                 @endfor
             </div>
+
+            @include('layouts.pagination')
         </div>
     </main>
 @endsection

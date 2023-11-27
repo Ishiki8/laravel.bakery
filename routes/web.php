@@ -33,3 +33,25 @@ Route::get('/category', function () {
 Route::get('/search', function () {
     return view('search')->with('title', 'Поиск');
 });
+
+Route::get('/cart', function () {
+    return view('cart')->with('title', 'Корзина');
+});
+
+Route::get('/product', function() {
+   return view('product')->with([
+       'title' => 'Продукт',
+       'product_image' => asset('img/products/cheburek.jpg'),
+       'product_title' => 'Чебурек крутой',
+       'product_description' => 'Фулл балдеж чилл расслабон бейба',
+       'product_price' => 1000
+   ]);
+});
+
+Route::get('/registration', function () {
+   return view('registration')->with('title', 'Регистрация');
+});
+
+Route::get('/login', function () {
+    return view('login')->with('title', 'Вход');
+});
