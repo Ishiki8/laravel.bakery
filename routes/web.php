@@ -14,5 +14,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('index')->with('title', 'Главная');
+});
+
+Route::get('/category', function () {
+    return view('category')->with([
+        'title' => 'Категория',
+        'category_title' => [
+            'bread' => 'Хлеб',
+            'buns' => 'Булочки',
+            'cakes' => 'Торты',
+            'cookies' => 'Печенье',
+            'pies' => 'Пирожки'
+        ][$_GET['id']]
+    ]);
+});
+
+Route::get('/search', function () {
+    return view('search')->with('title', 'Поиск');
 });

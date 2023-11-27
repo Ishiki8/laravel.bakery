@@ -74,7 +74,6 @@ img {
     color: var(--bg-color);
 }
 
-
 section {
     padding: 50px 0;
 }
@@ -84,12 +83,7 @@ section {
     text-transform: uppercase;
     color: var(--contrast-color);
     font-weight: 700;
-
-
 }
-
-
-
 
 .section-title span {
     background-color: var(--bg-color);
@@ -203,7 +197,7 @@ section {
 .carousel.carousel-fade .carousel-item {
     display: block;
     opacity: 0;
-    transition: opacity  .7s;
+    transition: linear .2s;
 }
 
 .carousel.carousel-fade .carousel-item.active {
