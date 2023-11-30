@@ -10,7 +10,7 @@
             <p class="product-excerpt">{{ $product_description }}</p>
             <div class="product-bottom-details d-flex justify-content-between">
                 <div class="product-price">
-                    {{ $product_price }} ₽
+                    {{ $product_price }} руб.
                 </div>
 
                 <form action="{{ route('cart-add', $product ) }}" method="POST">

@@ -33,3 +33,5 @@ Route::get('/cart', [Controllers\CartController::class, 'cart'])->name('cart');
 Route::post('/cart/add/{id}', [Controllers\CartController::class, 'cartAdd'])->name('cart-add');
 
 Route::post('/cart/remove/{id}', [Controllers\CartController::class, 'cartRemove'])->name('cart-remove');
+
+Route::get('/cart/confirm', [Controllers\CartController::class, 'cartConfirm'])->name('cart-confirm');

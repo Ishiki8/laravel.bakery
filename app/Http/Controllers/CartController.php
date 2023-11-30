@@ -9,12 +9,27 @@ class CartController extends Controller
 {
     public function cart() {
         $orderId = session('orderId');
+        $order = Order::find($orderId);
 
-        if (!is_null($orderId)) {
-            $order = Order::findOrFail($orderId);
-        }
+//        if (!is_null($orderId)) {
+//
+//        }
 
         return view('cart')->with([
+            'categories' => (new MainController())->categories(),
+            'order' => $order,
+        ]);
+    }
+
+    public function cartConfirm() {
+        $orderId = session('orderId');
+        $order = Order::find($orderId);
+
+        if (is_null($orderId)) {
+            return redirect(route('index'));
+        }
+
+        return view('cart_confirm')->with([
             'categories' => (new MainController())->categories(),
             'order' => $order,
         ]);
@@ -52,6 +67,7 @@ class CartController extends Controller
             $pivotRow = $order->products()->where('product_id', $productId)->first()->pivot;
             if ($pivotRow->quantity < 2) {
                 $order->products()->detach($productId);
+                session(['orderId' => null]);
             } else {
                 $pivotRow->quantity--;
                 $pivotRow->update();

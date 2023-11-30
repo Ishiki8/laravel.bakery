@@ -14,6 +14,15 @@
             </div>
 
             <div class="row ">
+                @foreach($products as $product)
+                    @include('product_card', [
+                        'product_image' => $product->image,
+                        'product_code' => $product->code,
+                        'product_title' => $product->title,
+                        'product_description' => $product->description,
+                        'product_price' => $product->price
+                    ])
+                @endforeach
 {{--                @for($i = 0; $i < 8; $i++)--}}
 {{--                    @include('product_card', [--}}
 {{--                        'product_image' => asset('img/products/baton1.jpg'),--}}

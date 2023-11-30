@@ -85,7 +85,7 @@
                     </div>
 
                     <div class="d-grid">
-                        <a href="#" class="btn btn-primary">Оформить заказ</a>
+                        <a href="{{ route('cart-confirm') }}" class="btn btn-primary">Перейти к оформлению заказа</a>
                     </div></div>
             </div>
         </div>

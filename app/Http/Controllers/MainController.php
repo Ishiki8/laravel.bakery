@@ -34,7 +34,17 @@ class MainController extends Controller
     }
 
     public function search() {
+        if (!isset($_GET['search'])) {
+            return redirect(route('index'));
+        }
+
+        $products = Product::where('title', 'like', '%' . $_GET['search'] . '%')
+            ->orWhere('description', 'like', '%' . $_GET['search'] . '%')
+            ->get()
+            ->sortDesc();
+
         return view('search')->with([
+            'products' => $products,
             'categories' => $this->categories()
         ]);
     }

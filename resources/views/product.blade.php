@@ -18,23 +18,18 @@
                     <div class="bg-white product-content p-3 h-100">
                         <h1 class="section-title h3"><span class="ps-0">{{ $product->title }}</span></h1>
 
+                        <p class="product-excerpt">{{ $product->description }}</p>
+
                         <div class="product-price">
                             {{ $product->price }} руб.
                         </div>
 
-                        <p class="product-excerpt">{{ $product->description }}</p>
-
                         <div class="product-add2cart">
                             <div class="input-group">
-                                <label>
-                                    <input type="number" class="form-control cart-input" value="1" min="1" max="100">
-                                </label>
-
                                 <form action="{{ route('cart-add', $product) }}" method="POST">
-                                    <button type="submit" class="btn btn-outline-secondary ms-2"><i class="fas fa-shopping-cart"></i> В корзину</button>
+                                    <button type="submit" class="btn btn-outline-secondary"><i class="fas fa-shopping-cart"></i> В корзину</button>
                                     @csrf
                                 </form>
-
                             </div>
                         </div>
 

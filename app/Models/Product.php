@@ -43,4 +43,8 @@ class Product extends Model
 
         return $sum;
     }
+
+    public static function getProductsBySearchQuery($searchQuery) {
+
+    }
 }
