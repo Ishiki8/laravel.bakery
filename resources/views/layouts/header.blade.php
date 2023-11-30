@@ -1,3 +1,7 @@
+ @php
+     $productsInCart = \App\Models\Product::countProductsInCart()
+ @endphp
+
 <header class="header">
     <div class="header-top py-1">
         <div class="container-fluid">
@@ -19,8 +23,8 @@
                 <div class="col-6 col-sm-4">
                     <div class="d-flex justify-content-end">
                         <div class="header-top-signbtns">
-                            <a href="{{ asset('login') }}"><button type="button" class="btn btn-sm">Вход</button></a>
-                            <a href="{{ asset('registration') }}"><button type="button" class="btn btn-sm">Регистрация</button></a>
+                            <a href="{{ route('login') }}"><button type="button" class="btn btn-sm">Вход</button></a>
+                            <a href="{{ route('registration') }}"><button type="button" class="btn btn-sm">Регистрация</button></a>
                         </div>
                     </div>
                 </div>
@@ -33,20 +37,22 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-sm-6 col-md-4">
-                    <a href="{{ asset('index.php') }}" class="header-logo h1">ХЛЕБУШЕК</a>
+                    <a href="{{ route('index') }}" class="header-logo h1">ХЛЕБУШЕК</a>
                 </div>
 
                 <div class="col-md-4 order-md-2 text-end d-none d-md-block">
-                    <a href="{{ asset('cart') }}">
+                    <a href="{{ route('cart') }}">
                         <button class="btn position-relative" type="button">
                             <i class="fa-solid fa-cart-shopping"></i>
-                            <span class="position-absolute top-0 start-50 badge rounded-pill bg-danger">3</span>
+                            @if($productsInCart)
+                                <span class="position-absolute top-0 start-50 badge rounded-pill bg-danger">{{ $productsInCart }}</span>
+                            @endif
                         </button>
                     </a>
                 </div>
 
                 <div class="col-md-4 col-sm-6 order-md-1 mt-2 mt-sm-0">
-                    <form action="{{ asset('search') }}">
+                    <form action="{{ route('search') }}">
                         <div class="input-group">
                             <input type="text" name="search" class="form-control" placeholder="Поиск" aria-label="Поиск" aria-describedby="button-search">
                             <button class="btn btn-outline-secondary" type="submit" id="btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -74,31 +80,30 @@
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav m-auto">
-                        <li class="nav-item">
-                            <a {!!(isset($_GET['id']) && $_GET['id'] === 'bread') ? 'class="nav-link active" aria-current="page"' : 'class="nav-link"'!!} href="{{ asset('category?id=bread') }}">Хлеб</a>
-                        </li>
-                        <li class="nav-item">
-                            <a {!!(isset($_GET['id']) && $_GET['id'] === 'buns') ? 'class="nav-link active" aria-current="page"' : 'class="nav-link"'!!} href="{{ asset('category?id=buns') }}">Булочки</a>
-                        </li>
-                        <li class="nav-item">
-                            <a {!!(isset($_GET['id']) && $_GET['id'] === 'cakes') ? 'class="nav-link active" aria-current="page"' : 'class="nav-link"'!!} href="{{ asset('category?id=cakes') }}">Торты</a>
-                        </li>
-                        <li class="nav-item">
-                            <a {!!(isset($_GET['id']) && $_GET['id'] === 'cookies') ? 'class="nav-link active" aria-current="page"' : 'class="nav-link"'!!} href="{{ asset('category?id=cookies') }}">Печенье</a>
-                        </li>
-                        <li class="nav-item">
-                            <a {!!(isset($_GET['id']) && $_GET['id'] === 'pies') ? 'class="nav-link active" aria-current="page"' : 'class="nav-link"'!!} href="{{ asset('category?id=pies') }}">Пирожки</a>
-                        </li>
+                        @foreach($categories as $category)
+                            <li class="nav-item">
+                                <a {!!(isset($active_category) && $active_category === $category->code) ?
+                                        'class="nav-link active" aria-current="page"' :
+                                        'class="nav-link"'!!}
+                                        href="{{ route('category', $category->code) }}">
+                                    {{ $category->title }}
+                                </a>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
 
 
             <div class="d-block d-md-none" id="navbar-cart">
-                <button class="btn position-relative" type="button">
-                    <i class="fa-solid fa-cart-shopping cart-shopping-navbar"></i>
-                    <span class="position-absolute top-0 start-50 badge rounded-pill bg-danger">3</span>
-                </button>
+                <a href="{{ asset('cart') }}">
+                    <button class="btn position-relative" type="button">
+                        <i class="fa-solid fa-cart-shopping cart-shopping-navbar"></i>
+                        @if($productsInCart)
+                            <span class="position-absolute top-0 start-50 badge rounded-pill bg-danger">{{ $productsInCart }}</span>
+                        @endif
+                    </button>
+                </a>
             </div>
         </div>
     </nav>

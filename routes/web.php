@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,45 +14,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index')->with('title', 'Главная');
-});
+Route::get('/', [Controllers\MainController::class, 'index'])->name('index');
 
-Route::get('/category', function () {
-    return view('category')->with([
-        'title' => 'Категория',
-        'category_title' => [
-            'bread' => 'Хлеб',
-            'buns' => 'Булочки',
-            'cakes' => 'Торты',
-            'cookies' => 'Печенье',
-            'pies' => 'Пирожки'
-        ][$_GET['id']]
-    ]);
-});
+Route::get('/category/{code}', [Controllers\MainController::class, 'category'])->name('category');
 
-Route::get('/search', function () {
-    return view('search')->with('title', 'Поиск');
-});
+Route::get('/search', [Controllers\MainController::class, 'search'])->name('search');
 
-Route::get('/cart', function () {
-    return view('cart')->with('title', 'Корзина');
-});
+Route::get('/product/{code}', [Controllers\MainController::class, 'product'])->name('product');
 
-Route::get('/product', function() {
-   return view('product')->with([
-       'title' => 'Продукт',
-       'product_image' => asset('img/products/cheburek.jpg'),
-       'product_title' => 'Чебурек крутой',
-       'product_description' => 'Фулл балдеж чилл расслабон бейба',
-       'product_price' => 1000
-   ]);
-});
+Route::get('/registration', [Controllers\MainController::class, 'registration'])->name('registration');
 
-Route::get('/registration', function () {
-   return view('registration')->with('title', 'Регистрация');
-});
+Route::get('/login', [Controllers\MainController::class, 'login'])->name('login');
 
-Route::get('/login', function () {
-    return view('login')->with('title', 'Вход');
-});
+Route::get('/admin', [Controllers\MainController::class, 'admin'])->name('admin');
+
+Route::get('/cart', [Controllers\CartController::class, 'cart'])->name('cart');
+
+Route::post('/cart/add/{id}', [Controllers\CartController::class, 'cartAdd'])->name('cart-add');
+
+Route::post('/cart/remove/{id}', [Controllers\CartController::class, 'cartRemove'])->name('cart-remove');

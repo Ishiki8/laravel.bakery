@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-12">
-        <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
                 <li class="page-item">
                     <a class="page-link" href="#" aria-label="Previous">

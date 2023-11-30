@@ -1,84 +1,95 @@
 @extends('layouts._layout')
 
+@section('title', 'Корзина')
+
 @section('content')
-    <main class="main">
-        <div class="container-fluid">
-            <div class="row mt-5 mb-5">
-                <div class="col-12">
-                    <h2 class="section-title text-center">
-                        <span>Товары в корзине</span>
-                    </h2>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="row">
-                    <div class="col-md-8 cart">
-                        <div class="row border-top border-bottom">
-                            <div class="row main align-items-center">
-                                <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg" alt=""></div>
-                                <div class="col">
-                                    <div class="row text-muted">Shirt</div>
-                                    <div class="row">Cotton T-shirt</div>
-                                </div>
-                                <div class="col">
-                                    <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                                </div>
-                                <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="row main align-items-center">
-                                <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/ba3tvGm.jpg" alt=""></div>
-                                <div class="col">
-                                    <div class="row text-muted">Shirt</div>
-                                    <div class="row">Cotton T-shirt</div>
-                                </div>
-                                <div class="col">
-                                    <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                                </div>
-                                <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                            </div>
-                        </div>
-                        <div class="row border-top border-bottom">
-                            <div class="row main align-items-center">
-                                <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg" alt=""></div>
-                                <div class="col">
-                                    <div class="row text-muted">Shirt</div>
-                                    <div class="row">Cotton T-shirt</div>
-                                </div>
-                                <div class="col">
-                                    <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                                </div>
-                                <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                            </div>
-                        </div>
-                        <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
-                    </div>
-                    <div class="col-md-4 summary">
-                        <div><h5><b>Summary</b></h5></div>
-                        <hr>
-                        <div class="row">
-                            <div class="col" style="padding-left:0;">ITEMS 3</div>
-                            <div class="col text-right">&euro; 132.00</div>
-                        </div>
-                        <form>
-                            <p>SHIPPING</p>
-                            <label>
-                                <select><option class="text-muted">Standard-Delivery- &euro;5.00</option></select>
-                            </label>
-                            <p>GIVE CODE</p>
-                            <label for="code"><input id="code" placeholder="Enter your code"></label>
-                        </form>
-                        <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
-                            <div class="col">TOTAL PRICE</div>
-                            <div class="col text-right">&euro; 137.00</div>
-                        </div>
-                        <button class="btn">CHECKOUT</button>
-                    </div>
-                </div>
-
+<main class="main">
+    <div class="container-fluid">
+        <div class="row mt-5 mb-5">
+            <div class="col-12">
+                <h2 class="section-title text-center">
+                    <span>Товары в корзине</span>
+                </h2>
             </div>
         </div>
-    </main>
+    </div>
+    <div class="container-fluid">
+        @if(\App\Models\Product::countProductsInCart() === 0)
+            <span class="fs-3">В корзине пока что пусто...</span>
+        @else
+        <div class="row">
+
+            <div class="col-lg-8 mb-3">
+                <div class="cart-content p-3 h-100 bg-white">
+
+                    <div class="table-responsive">
+                        <table class="table align-middle table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Фото</th>
+                                    <th>Товар</th>
+                                    <th>Цена</th>
+                                    <th>Количество</th>
+                                    <th>Общая стоимость</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($order->products as $product)
+                                    <tr class="text-center">
+                                        <td class="product-img-td">
+                                            <a href="{{ route('product', $product->code) }}">
+                                                <img src="{{ $product->image }}" alt="">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('product', $product->code) }}" class="cart-content-title">
+                                                {{ $product->title }}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            {{ $product->price }} руб.
+                                        </td>
+                                        <td>
+                                            <form action="{{ route('cart-remove', $product) }}" method="POST" class="d-inline">
+                                                <button type="submit" class="btn btn-sm btn-danger mb-1">
+                                                    <span>-</span>
+                                                </button>
+                                                @csrf
+                                            </form>
+
+                                                <span class="ms-md-2 me-md-2">{{ $product->pivot->quantity }}</span>
+
+                                            <form action="{{ route('cart-add', $product) }}" method="POST" class="d-inline">
+                                                <button type="submit" class="btn btn-sm btn-primary mb-1">
+                                                    <span>+</span>
+                                                </button>
+                                                @csrf
+                                            </form>
+                                        </td>
+                                        <td>
+                                            {{ number_format($product->getTotalPrice(), 2) }} руб.
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-3 ">
+                <div class="cart-summary p-3 sidebar sticky-top-2">
+                    <div class="d-flex justify-content-between my-3">
+                        <h3>Итого</h3>
+                        <h3>{{ number_format($order->getTotalPrice(), 2) }} руб.</h3>
+                    </div>
+
+                    <div class="d-grid">
+                        <a href="#" class="btn btn-primary">Оформить заказ</a>
+                    </div></div>
+            </div>
+        </div>
+    </div>
+    @endif
+</main>
 @endsection

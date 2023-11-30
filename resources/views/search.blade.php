@@ -1,5 +1,7 @@
 @extends('layouts._layout')
 
+@section('title', !empty($_GET['search']) ? $_GET['search'] : 'Пустой запрос')
+
 @section('content')
     <main class="main">
         <div class="container-fluid">
@@ -12,14 +14,14 @@
             </div>
 
             <div class="row ">
-                @for($i = 0; $i < 8; $i++)
-                    @include('product_card', [
-                        'product_image' => asset('img/products/baton1.jpg'),
-                        'product_title' => 'Батонище',
-                        'product_description' => 'Вкуснятина-то какая!',
-                        'product_price' => 200
-                    ])
-                @endfor
+{{--                @for($i = 0; $i < 8; $i++)--}}
+{{--                    @include('product_card', [--}}
+{{--                        'product_image' => asset('img/products/baton1.jpg'),--}}
+{{--                        'product_title' => 'Батонище',--}}
+{{--                        'product_description' => 'Вкуснятина-то какая!',--}}
+{{--                        'product_price' => 200--}}
+{{--                    ])--}}
+{{--                @endfor--}}
             </div>
 
             @include('layouts.pagination')

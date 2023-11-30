@@ -1,4 +1,6 @@
-@extends('layouts._layout')
+@extends('layouts._layout', ['categories' => $categories])
+
+@section('title', 'Главная')
 
 @section('content')
     <main class="main">
@@ -69,14 +71,15 @@
                 </div>
 
                 <div class="row">
-                    @for($i = 0; $i < 8; $i++)
+                    @foreach($products as $product)
                         @include('product_card', [
-                            'product_image' => asset('img/products/baton1.jpg'),
-                            'product_title' => 'Батонище',
-                            'product_description' => 'Вкуснятина-то какая!',
-                            'product_price' => 200
+                            'product_code' => $product->code,
+                            'product_image' => $product->image,
+                            'product_title' => $product->title,
+                            'product_description' => $product->description,
+                            'product_price' => $product->price
                         ])
-                    @endfor
+                    @endforeach
                 </div>
             </div>
         </section>

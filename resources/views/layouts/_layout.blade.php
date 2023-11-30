@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     @include('layouts.styles')
-    <title>{{ $title }}</title>
+    <title>@yield('title')</title>
 </head>
 <body>
 

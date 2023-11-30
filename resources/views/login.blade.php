@@ -1,5 +1,7 @@
 @extends('layouts._layout')
 
+@section('title', 'Вход')
+
 @section('content')
     <main class="main">
         <div class="container-fluid">
@@ -11,6 +13,7 @@
                     <div class="row">
                         <div class="col-md-6 offset-md-3">
                             <form action="" class="needs-validation" novalidate>
+                                @csrf
                                 <div class="mb-3">
                                     <label for="loginInputEmail" class="form-label required">Почта</label>
                                     <input type="email" class="form-control" id="loginInputEmail"

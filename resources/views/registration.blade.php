@@ -1,5 +1,7 @@
 @extends('layouts._layout')
 
+@section('title', 'Регистрация')
+
 @section('content')
     <main class="main">
         <div class="container-fluid">
@@ -11,6 +13,7 @@
                     <div class="row">
                         <div class="col-md-6 offset-md-3">
                             <form action="" class="needs-validation" novalidate>
+                                @csrf
                                 <div class="mb-3">
                                     <label for="registrationInputFullname" class="form-label required">ФИО</label>
                                     <input type="text" class="form-control" id="registrationInputFullname"

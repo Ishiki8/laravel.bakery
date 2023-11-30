@@ -102,6 +102,13 @@ section {
     border-top: 1px dashed var(--text-color);
     /* z-index: -1; */
 }
+
+.sticky-top-2 {
+    position: sticky;
+    top: 70px;
+    z-index: 1020;
+}
+
 /* =========================== General rules ============================= */
 
 /* =========================== Header rules ============================= */
@@ -237,7 +244,7 @@ section {
 .product-card {
     transition: all .3s;
     border: 1px solid var(--secondary-text-color);
-    border-radius: 0 0 7px 7px;
+    border-radius: 8px;
     background-color: #fff;
     position: relative;
 }
@@ -256,6 +263,7 @@ section {
 
 .product-thumb img {
     height: 100%;
+    border-radius: 7px;
 }
 
 .product-details {
@@ -366,6 +374,39 @@ section {
 }
 
 /* ============================= Product =============================== */
+
+/* ============================= Cart ================================ */
+
+.cart-content table img {
+    max-width: 70px;
+}
+
+.cart-content table th {
+    text-align: center;
+}
+
+.cart-content table td {
+    padding: 1rem;
+}
+
+.cart-content-title {
+    text-decoration: none;
+    display: block;
+}
+
+.cart-qty {
+    width: 70px;
+}
+
+.cart-summary h3 {
+    color: #000;
+}
+
+.cart-summary .btn {
+    padding: 1rem;
+}
+
+/* ============================= Cart ================================ */
 
 /* ============================= Validation ============================= */
 
