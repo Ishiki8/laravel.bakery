@@ -10,7 +10,7 @@
                     <a href="{{ route('index') }}" class="header-logo h1">ХЛЕБУШЕК</a>
                 </div>
 
-                <div class="col-4">
+                <div class="col-12 col-md-4 order-md-1 order-2 d-md-block d-flex justify-content-center mt-1 mt-md-0 mb-md-0 mb-1 p-0">
                     <form action="{{ route('search') }}">
                         <div class="input-group">
                             <input type="text" name="search" class="form-control" placeholder="Поиск" aria-label="Поиск" aria-describedby="button-search">
@@ -19,7 +19,7 @@
                     </form>
                 </div>
 
-                <div class="col-6 col-md-4">
+                <div class="col-6 col-md-4 d-flex justify-content-end order-md-2 order-1">
                     <div class="header-top-signbtns">
                         @guest
                             <a href="{{ route('user.login') }}">
@@ -34,7 +34,17 @@
                             </a>
                         @endguest
                         @auth
-                            <a href="#" class="m-2">{{ auth()->user()->full_name }}</a>
+
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-secondary-outline btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Аккаунт
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark z-3">
+                                        <li class="dropdown-header" style="color: var(--accent-color)">{{ auth()->user()->full_name }}</li>
+                                        <li><a class="dropdown-item" href="{{ route('user.userOrders') }}">Мои заказы</a></li>
+                                        <li><a class="dropdown-item" href="#">Настройки</a></li>
+                                    </ul>
+                                </div>
                             <a href="{{ route('user.logout') }}">
                                 <button type="button" class="btn btn-sm">
                                     Выйти
@@ -49,7 +59,7 @@
     {{-- <div class="header-top"></div> --}}
 </header>
 
-<div class="header-bottom sticky-top">
+<div class="header-bottom sticky-top z-2">
     <nav class="navbar navbar-expand-sm bg-dark" data-bs-theme="dark">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +68,7 @@
 
             <div class="offcanvas offcanvas-start" id="navbarNav" tabindex="-1" aria-labelledby="offcanvasLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasProductsLabel">Наша продукция</h5>
+                    <h5 class="offcanvas-title " id="offcanvasProductsLabel" style="color: var(--accent-color)">Наша продукция</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">

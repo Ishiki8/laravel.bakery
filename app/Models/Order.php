@@ -37,6 +37,7 @@ class Order extends Model
         $this->client_address = $address;
         $this->client_phone = $phone;
         $this->status = 1;
+        $this->user_id = auth()->id();
         $this->save();
 
         session()->forget('orderId');

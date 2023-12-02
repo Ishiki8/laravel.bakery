@@ -122,9 +122,9 @@ section {
     background-color: var(--secondary-accent-color);
 }
 
-.header-top-signbtns button {
-    margin-bottom: 4px;
-}
+/*.header-top-signbtns button {*/
+/*    margin-bottom: 4px;*/
+/*}*/
 
 .fa-cart-shopping {
     color: var(--text-color);
