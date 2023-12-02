@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -22,17 +23,35 @@ class CartController extends Controller
     }
 
     public function cartConfirm() {
+        if (Auth::check()) {
+            $orderId = session('orderId');
+
+            if (is_null($orderId)) {
+                return redirect(route('index'));
+            }
+
+            $order = Order::find($orderId);
+
+            return view('cart_confirm')->with([
+                'categories' => (new MainController())->categories(),
+                'order' => $order,
+            ]);
+        }
+
+        return redirect(route('user.login'));
+    }
+
+    public function cartConfirmAdd(Request $request) {
         $orderId = session('orderId');
-        $order = Order::find($orderId);
 
         if (is_null($orderId)) {
             return redirect(route('index'));
         }
 
-        return view('cart_confirm')->with([
-            'categories' => (new MainController())->categories(),
-            'order' => $order,
-        ]);
+        $order = Order::find($orderId);
+        $order->saveOrder($request->address, $request->phone);
+
+        return redirect(route('index'));
     }
 
     public function cartAdd($productId) {
@@ -67,7 +86,6 @@ class CartController extends Controller
             $pivotRow = $order->products()->where('product_id', $productId)->first()->pivot;
             if ($pivotRow->quantity < 2) {
                 $order->products()->detach($productId);
-                session(['orderId' => null]);
             } else {
                 $pivotRow->quantity--;
                 $pivotRow->update();

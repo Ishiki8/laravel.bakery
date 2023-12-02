@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
 {
@@ -54,18 +55,6 @@ class MainController extends Controller
 
         return view('product')->with([
             'product' => $product,
-            'categories' => $this->categories()
-        ]);
-    }
-
-    public function registration() {
-        return view('registration')->with([
-            'categories' => $this->categories()
-        ]);
-    }
-
-    public function login() {
-        return view('login')->with([
             'categories' => $this->categories()
         ]);
     }

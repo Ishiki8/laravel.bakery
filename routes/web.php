@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 
@@ -15,23 +16,31 @@ use App\Http\Controllers;
 */
 
 Route::get('/', [Controllers\MainController::class, 'index'])->name('index');
-
+Route::get('/admin', [Controllers\MainController::class, 'admin'])->name('admin');
 Route::get('/category/{code}', [Controllers\MainController::class, 'category'])->name('category');
-
 Route::get('/search', [Controllers\MainController::class, 'search'])->name('search');
-
 Route::get('/product/{code}', [Controllers\MainController::class, 'product'])->name('product');
 
-Route::get('/registration', [Controllers\MainController::class, 'registration'])->name('registration');
+Route::controller(Controllers\CartController::class)->group(function() {
+    Route::get('/cart',  'cart')->name('cart');
+    Route::post('/cart/add/{id}', 'cartAdd')->name('cart-add');
+    Route::post('/cart/remove/{id}', 'cartRemove')->name('cart-remove');
+    Route::get('/cart/confirm', 'cartConfirm')->name('cart-confirm');
+    Route::post('/cart/confirm', 'cartConfirmAdd')->name('cart-confirm-add');
+});
 
-Route::get('/login', [Controllers\MainController::class, 'login'])->name('login');
 
-Route::get('/admin', [Controllers\MainController::class, 'admin'])->name('admin');
 
-Route::get('/cart', [Controllers\CartController::class, 'cart'])->name('cart');
+Route::name('user.')->group(function() {
+    Route::get('/login', [Controllers\Auth\LoginController::class, 'loginView'])->name('login');
+    Route::post('/login', [Controllers\Auth\LoginController::class, 'login']);
 
-Route::post('/cart/add/{id}', [Controllers\CartController::class, 'cartAdd'])->name('cart-add');
+    Route::get('/logout', function() {
+        Auth::logout();
+        return redirect(route('index'));
+    })->name('logout');
 
-Route::post('/cart/remove/{id}', [Controllers\CartController::class, 'cartRemove'])->name('cart-remove');
+    Route::get('/registration', [Controllers\Auth\RegistrationController::class, 'registrationView'])->name('registration');
+    Route::post('/registration', [Controllers\Auth\RegistrationController::class, 'register']);
+});
 
-Route::get('/cart/confirm', [Controllers\CartController::class, 'cartConfirm'])->name('cart-confirm');

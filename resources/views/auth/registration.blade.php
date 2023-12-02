@@ -1,0 +1,55 @@
+@extends('layouts._layout')
+
+@section('title', 'Регистрация')
+
+@section('content')
+    <main class="main">
+        <div class="container-fluid">
+            <div class="row mt-5 mb-5">
+                <div class="col-12">
+                    <h2 class="section-title text-center h3">
+                        <span>Регистрация</span>
+                    </h2>
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3">
+                            <form action="{{ route('user.registration') }}" method="POST">
+                                <div class="mb-3">
+                                    <label for="registrationInputFullname" class="form-label">ФИО</label>
+                                    <input type="text" class="form-control @error('full_name') is-invalid @enderror"
+                                           id="registrationInputFullname" name="full_name" placeholder="ФИО" value="{{ old('full_name') }}">
+
+                                    @error('full_name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+
+                                </div>
+                                <div class="mb-3">
+                                    <label for="registrationInputEmail" class="form-label">Почта</label>
+                                    <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                           id="registrationInputEmail" name="email" placeholder="Email" value="{{ old('email') }}">
+
+                                    @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+
+                                </div>
+                                <div class="mb-3">
+                                    <label for="registrationInputPassword" class="form-label">Пароль</label>
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                           id="registrationInputPassword" name="password" placeholder="Пароль">
+
+                                    @error('password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+
+                                </div>
+                                @csrf
+                                <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+@endsection

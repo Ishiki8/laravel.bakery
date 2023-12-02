@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->timestamp('date')->useCurrent();
             $table->unsignedTinyInteger('status')->default(0);
+            $table->string('client_phone', 11)->nullable();
+            $table->string('client_address', 200)->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
         });
     }

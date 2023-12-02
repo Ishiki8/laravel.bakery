@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password', 255);
             $table->string('address', 200)->nullable();
             $table->string('phone_number', 11)->nullable();
-            $table->unsignedBigInteger('role_id');
+            $table->unsignedBigInteger('role_id')->default(2);
         });
     }
 

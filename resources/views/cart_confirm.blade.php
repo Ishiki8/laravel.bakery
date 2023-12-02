@@ -12,11 +12,10 @@
                     </h2>
                     <div class="row">
                         <div class="col-md-6 offset-md-3">
-                            <form action="" class="needs-validation" novalidate>
-                                @csrf
+                            <form action="{{ route('cart-confirm-add') }}" method="POST" class="needs-validation" novalidate>
                                 <div class="mb-3">
                                     <label for="cartInputAddress" class="form-label required">Адрес доставки</label>
-                                    <input type="text" class="form-control" id="cartInputAddress"
+                                    <input type="text" class="form-control" id="cartInputAddress" name="address"
                                            placeholder="Адрес доставки" required>
                                     <div class="invalid-feedback">
                                         Введите адрес доставки.
@@ -24,7 +23,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="cartInputPhone" class="form-label required">Номер телефона</label>
-                                    <input type="text" class="form-control" id="cartInputPhone"
+                                    <input type="text" class="form-control" id="cartInputPhone" name="phone"
                                            placeholder="Номер телефона" required>
                                     <div class="invalid-feedback">
                                         Введите номер телефона.
@@ -33,6 +32,7 @@
                                 <div class="mb-3 cart-summary">
                                     <h3>Итого: {{ number_format($order->getTotalPrice(), 2) }} руб.</h3>
                                 </div>
+                                @csrf
                                 <button type="submit" class="btn btn-primary">Оформить заказ</button>
                             </form>
                         </div>
