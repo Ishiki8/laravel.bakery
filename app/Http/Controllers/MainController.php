@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,6 +35,15 @@ class MainController extends Controller
         return Category::get();
     }
 
+    public function userOrdersView() {
+        $orders = Order::where('user_id', '=', auth()->id())->get();
+
+        return view('user_orders')->with([
+            'orders' => $orders,
+            'categories' => Category::get(),
+        ]);
+    }
+
     public function search() {
         if (!isset($_GET['search'])) {
             return redirect(route('index'));
@@ -60,6 +70,6 @@ class MainController extends Controller
     }
 
     public function admin() {
-        return view('admin_panel._panel');
+        return view('admin._panel');
     }
 }

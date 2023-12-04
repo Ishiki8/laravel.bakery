@@ -19,6 +19,10 @@ class Order extends Model
         return $this->belongsToMany(Product::class)->withPivot('quantity');
     }
 
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
     public function getTotalPrice() {
         $sum = 0;
 
@@ -43,5 +47,15 @@ class Order extends Model
         session()->forget('orderId');
 
         return true;
+    }
+
+    public function userOrders() {
+        $orders = Order::where('user_id', auth()->id());
+
+        if (!isset($orders)) {
+            return null;
+        }
+
+        return $orders;
     }
 }
