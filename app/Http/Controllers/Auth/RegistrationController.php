@@ -20,7 +20,7 @@ class RegistrationController extends Controller
             'categories' => Category::get()
         ]);
     }
-    
+
     public function register(Request $request)
     {
         if (Auth::check()) {

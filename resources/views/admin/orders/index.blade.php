@@ -33,7 +33,7 @@
                     </td>
                     <td>
                         <a href="#" class="cart-content-title">
-                            {{ \Carbon\Carbon::parse($order->date)->format('H:i d.m.Y') }}
+                            {{ \Carbon\Carbon::parse($order->date)->setTimezone('Asia/Yekaterinburg')->format('H:i d.m.Y') }}
                         </a>
                     </td>
                     <td>

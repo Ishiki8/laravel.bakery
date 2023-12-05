@@ -57,4 +57,18 @@ class User extends Authenticatable
     public function role() {
         return $this->belongsTo(Role::class);
     }
+
+    public function saveName($name) {
+        $this->full_name = $name;
+        $this->save();
+
+        return true;
+    }
+
+    public function saveEmail($email) {
+        $this->email = $email;
+        $this->save();
+
+        return true;
+    }
 }

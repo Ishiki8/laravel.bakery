@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,9 +37,9 @@ class MainController extends Controller
     }
 
     public function userOrdersView() {
-        $orders = Order::where('user_id', '=', auth()->id())->get();
+        $orders = Order::where('user_id', '=', auth()->id())->get()->sortDesc();
 
-        return view('user_orders')->with([
+        return view('auth.user_orders')->with([
             'orders' => $orders,
             'categories' => Category::get(),
         ]);

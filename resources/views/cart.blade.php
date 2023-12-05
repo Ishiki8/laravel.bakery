@@ -20,8 +20,8 @@
         <div class="row">
 
             <div class="col-lg-8 mb-3">
-                <div class="cart-content p-3 h-100 bg-white">
-
+                <div class="p-3 h-100 bg-white">
+{{--                    cart-content--}}
                     <div class="table-responsive">
                         <table class="table align-middle table-hover">
                             <thead class="table-dark">
@@ -35,7 +35,7 @@
                             </thead>
                             <tbody>
                                 @foreach($order->products as $product)
-                                    <tr class="text-center">
+                                    <tr>
                                         <td class="product-img-td">
                                             <a href="{{ route('product', $product->code) }}">
                                                 <img src="{{ $product->image }}" alt="">

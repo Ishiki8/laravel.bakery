@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('code', 50)->unique();
             $table->string('title', 50);
             $table->string('image')->nullable();
-            $table->decimal('weight', 5)->default(0);
+            $table->unsignedDecimal('weight', 5)->default(0);
             $table->string('description', 500)->nullable();
-            $table->decimal('price', 6)->default(0);
+            $table->unsignedDecimal('price', 6)->default(0);
             $table->unsignedBigInteger('category_id');
         });
     }

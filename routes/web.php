@@ -41,6 +41,10 @@ Route::name('user.')->group(function() {
     Route::post('/registration', [Controllers\Auth\RegistrationController::class, 'register']);
 
     Route::get('/orders', [Controllers\MainController::class, 'userOrdersView'])->name('userOrders');
+
+    Route::get('/settings', [Controllers\Auth\SettingsController::class, 'userSettingsView'])->name('userSettings');
+    Route::post('/settings/change/name', [Controllers\Auth\SettingsController::class, 'changeName'])->name('userChangeName');
+    Route::post('/settings/change/email', [Controllers\Auth\SettingsController::class, 'changeEmail'])->name('userChangeEmail');
 });
 
 Route::group(['middleware' => 'auth'], function() {

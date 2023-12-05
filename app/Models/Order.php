@@ -38,6 +38,7 @@ class Order extends Model
             return false;
         }
 
+        $this->price = $this->getTotalPrice();
         $this->client_address = $address;
         $this->client_phone = $phone;
         $this->status = 1;
