@@ -66,7 +66,6 @@ class CartController extends Controller
         ], $messages);
 
         $order->saveOrder($validateFields['address'], $validateFields['phone']);
-``
         return redirect(route('index'));
     }
 
