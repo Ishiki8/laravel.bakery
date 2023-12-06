@@ -1,7 +1,7 @@
 <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
     <div class="product-card">
         <div class="product-thumb">
-            <a href="{{ route('product', $product_code) }}"><img src="{{ asset($product_image) }}" alt=""></a>
+            <a href="{{ route('product', $product_code) }}"><img src="{{ asset($product_image) }}" alt="{{ $product_code }}"></a>
         </div>
         <div class="product-details">
             <h4>

@@ -40,7 +40,7 @@
                                         Аккаунт
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark z-3">
-                                        <li class="dropdown-header" style="color: var(--accent-color)">{{ auth()->user()->full_name }}</li>
+                                        <li class="dropdown-header" style="color: var(--accent-color)">{{ auth()->user()->username }}</li>
                                         <li><a class="dropdown-item" href="{{ route('user.userOrders') }}">Мои заказы</a></li>
                                         <li><a class="dropdown-item" href="{{ route('user.userSettings') }}">Настройки</a></li>
                                     </ul>

@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'full_name',
+        'username',
         'email',
         'password',
     ];
@@ -60,7 +60,7 @@ class User extends Authenticatable
     }
 
     public function saveName($name) {
-        $this->full_name = $name;
+        $this->username = $name;
         $this->save();
 
         return true;

@@ -18,7 +18,9 @@ return new class extends Migration
             $table->unsignedTinyInteger('status')->default(0);
             $table->string('client_phone', 11)->nullable();
             $table->string('client_address', 200)->nullable();
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable()->index();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

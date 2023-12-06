@@ -19,7 +19,9 @@ return new class extends Migration
             $table->unsignedDecimal('weight', 5)->default(0);
             $table->string('description', 500)->nullable();
             $table->unsignedDecimal('price', 6)->default(0);
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('category_id')->index();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

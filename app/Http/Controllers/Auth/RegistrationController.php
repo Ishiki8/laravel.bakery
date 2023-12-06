@@ -37,7 +37,7 @@ class RegistrationController extends Controller
         ];
 
         $validateFields = $request->validate([
-            'full_name' => ['required', 'string', 'max:50'],
+            'username' => ['required', 'string', 'max:50'],
             'email' => ['required', 'email', 'max:50', 'unique:users'],
             'password' => ['required', 'string', 'regex:/^[a-zA-Z0-9]+$/', 'min:8', 'max:64']
         ], $messages);

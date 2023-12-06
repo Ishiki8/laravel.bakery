@@ -27,10 +27,10 @@ class SettingsController extends Controller
         ];
 
         $validateFields = $request->validate([
-            'full_name' => ['required', 'string', 'max:50']
+            'username' => ['required', 'string', 'max:50']
         ], $messages);
 
-        $user->saveName($validateFields['full_name']);
+        $user->saveName($validateFields['username']);
 
         return redirect(route('user.userSettings'));
     }

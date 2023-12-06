@@ -14,11 +14,11 @@
                         <div class="col-md-6 offset-md-3">
                             <form action="{{ route('user.registration') }}" method="POST">
                                 <div class="mb-3">
-                                    <label for="registrationInputFullname" class="form-label">ФИО</label>
-                                    <input type="text" class="form-control @error('full_name') is-invalid @enderror"
-                                           id="registrationInputFullname" name="full_name" placeholder="ФИО" value="{{ old('full_name') }}">
+                                    <label for="registrationInputUsername" class="form-label">Имя</label>
+                                    <input type="text" class="form-control @error('username') is-invalid @enderror"
+                                           id="registrationInputUsername" name="username" placeholder="Имя пользователя" value="{{ old('username') }}">
 
-                                    @error('full_name')
+                                    @error('username')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>

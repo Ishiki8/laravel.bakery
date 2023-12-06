@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 
 /**
  * @mixin Builder;
@@ -36,6 +37,12 @@ class Order extends Model
     public function saveOrder($address, $phone) {
         if ($this->status !== 0) {
             return false;
+        }
+
+        if (Str::startsWith($phone, '+7')) {
+            $phone = substr($phone, 1);
+        } else {
+            $phone = '7' . substr($phone, 1);
         }
 
         $this->price = $this->getTotalPrice();

@@ -17,21 +17,21 @@
             <div class="row">
                 <div class="col-12 col-md-6 col-sm-8">
                     <div class="mb-3">
-                        <span class="fw-bold">ФИО:</span>
-                        <span>{{ $user->full_name }}</span>
+                        <span class="fw-bold">Имя:</span>
+                        <span>{{ $user->username }}</span>
                         <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapse-fullname" aria-expanded="@error('full_name') true @else false @enderror"
-                                aria-controls="collapse-fullname">
+                                data-bs-target="#collapse-username" aria-expanded="@error('username') true @else false @enderror"
+                                aria-controls="collapse-username">
                             Изменить
                         </button>
 
-                        <div class="collapse @error('full_name') show @enderror" id="collapse-fullname">
+                        <div class="collapse @error('username') show @enderror" id="collapse-username">
                             <form action="{{ route('user.userChangeName') }}" method="POST">
-                                <label for="changeInputFullname" class="form-label" hidden></label>
-                                <input type="text" class="form-control mt-1 @error('full_name') is-invalid @enderror"
-                                       id="changeInputFullname" name="full_name" placeholder="Введите новое ФИО" value="{{ old('full_name') }}">
+                                <label for="changeInputUsername" class="form-label" hidden></label>
+                                <input type="text" class="form-control mt-1 @error('username') is-invalid @enderror"
+                                       id="changeInputUsername" name="username" placeholder="Введите новое имя пользователя" value="{{ old('username') }}">
 
-                                @error('full_name')
+                                @error('username')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
 

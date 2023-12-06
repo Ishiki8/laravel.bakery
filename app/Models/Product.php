@@ -15,6 +15,14 @@ class Product extends Model
     use HasFactory;
     public $timestamps = false;
 
+    public function getImageAttribute() {
+        if (!$this->attributes['image']) {
+            return '/img/products/no_image.png';
+        }
+
+        return $this->attributes['image'];
+    }
+
     public function category() {
         return $this->belongsTo(Category::class);
     }

@@ -15,19 +15,21 @@
                             <form action="{{ route('cart-confirm-add') }}" method="POST" class="needs-validation" novalidate>
                                 <div class="mb-3">
                                     <label for="cartInputAddress" class="form-label required">Адрес доставки</label>
-                                    <input type="text" class="form-control" id="cartInputAddress" name="address"
-                                           placeholder="Адрес доставки" required>
-                                    <div class="invalid-feedback">
-                                        Введите адрес доставки.
-                                    </div>
+                                    <input type="text" class="form-control mt-1 @error('address') is-invalid @enderror"
+                                           id="cartInputAddress" name="address" placeholder="г. Екатеринбург, ул. Крауля, д. 168, к. 2, кв. 111" value="{{ $address ?? old('address') }}">
+
+                                    @error('address')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label for="cartInputPhone" class="form-label required">Номер телефона</label>
-                                    <input type="text" class="form-control" id="cartInputPhone" name="phone"
-                                           placeholder="Номер телефона" required>
-                                    <div class="invalid-feedback">
-                                        Введите номер телефона.
-                                    </div>
+                                    <input type="text" class="form-control mt-1 @error('phone') is-invalid @enderror"
+                                           id="cartInputPhone" name="phone" placeholder="Введите номер телефона (+7 | 8)" value="@if($phone)+@endif{{ $phone ?? old('phone') }}">
+
+                                    @error('phone')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="mb-3 cart-summary">
                                     <h3>Итого: {{ number_format($order->getTotalPrice(), 2) }} руб.</h3>

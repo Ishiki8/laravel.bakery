@@ -9,7 +9,7 @@
                 <div class="col-md-5 col-lg-4 mb-3">
                     <div class="bg-white">
                         <div class="product-thumb">
-                            <a href="#"><img src="{{ route('product', $product) }}" alt=""></a>
+                            <a href="{{ route('product', $product->code) }}"><img src="{{ asset($product->image) }}" alt="{{ $product->code }}"></a>
                         </div>
                     </div>
                 </div>

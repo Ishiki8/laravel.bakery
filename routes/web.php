@@ -34,6 +34,7 @@ Route::name('user.')->group(function() {
 
     Route::get('/logout', function() {
         Auth::logout();
+
         return redirect(route('index'));
     })->name('logout');
 
