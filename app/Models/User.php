@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -67,6 +68,33 @@ class User extends Authenticatable
 
     public function saveEmail($email) {
         $this->email = $email;
+        $this->save();
+
+        return true;
+    }
+
+    public function savePassword($password) {
+        $this->password = $password;
+        $this->save();
+
+        return true;
+    }
+
+    public function saveAddress($address) {
+        $this->address = $address;
+        $this->save();
+
+        return true;
+    }
+
+    public function savePhone($phone) {
+        if (Str::startsWith($phone, '+7')) {
+            $phone = substr($phone, 1);
+        } else {
+            $phone = '7' . substr($phone, 1);
+        }
+
+        $this->phone_number = $phone;
         $this->save();
 
         return true;

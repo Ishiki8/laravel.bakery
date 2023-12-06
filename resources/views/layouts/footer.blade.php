@@ -16,7 +16,7 @@
             <div class="col-sm-4 order-2 order-md-3">
                 <div class="d-md-flex align-items-center h-100 justify-content-end">
                     <i class="fa-solid fa-mobile-screen-button"></i>
-                    <a href="tel:+79001234567" class="ms-1 text-body">+7(900)-123-45-67</a>
+                    <a href="tel:+79001234567" class="ms-1 text-body">+7 (900) 123-45-67</a>
                 </div>
             </div>
         </div>

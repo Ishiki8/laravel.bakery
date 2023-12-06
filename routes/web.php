@@ -45,6 +45,9 @@ Route::name('user.')->group(function() {
     Route::get('/settings', [Controllers\Auth\SettingsController::class, 'userSettingsView'])->name('userSettings');
     Route::post('/settings/change/name', [Controllers\Auth\SettingsController::class, 'changeName'])->name('userChangeName');
     Route::post('/settings/change/email', [Controllers\Auth\SettingsController::class, 'changeEmail'])->name('userChangeEmail');
+    Route::post('/settings/change/password', [Controllers\Auth\SettingsController::class, 'changePassword'])->name('userChangePassword');
+    Route::post('/settings/change/address', [Controllers\Auth\SettingsController::class, 'changeAddress'])->name('userChangeAddress');
+    Route::post('/settings/change/phone', [Controllers\Auth\SettingsController::class, 'changePhone'])->name('userChangePhone');
 });
 
 Route::group(['middleware' => 'auth'], function() {

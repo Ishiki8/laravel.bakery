@@ -65,6 +65,81 @@
                             </form>
                         </div>
                     </div>
+
+                    <div class="mb-3">
+                        <span class="fw-bold">Пароль:</span>
+                        <span>********</span>
+                        <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapse-password" aria-expanded="@error('password') true @else false @enderror"
+                                aria-controls="collapse-email">
+                            Изменить
+                        </button>
+
+                        <div class="collapse @error('password') show @enderror" id="collapse-password">
+                            <form action="{{ route('user.userChangePassword') }}" method="POST">
+                                <label for="changeInputPassword" class="form-label" hidden></label>
+                                <input type="text" class="form-control mt-1 @error('password') is-invalid @enderror"
+                                       id="changeInputPassword" name="password" placeholder="Введите новый пароль">
+
+                                @error('password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+
+                                @csrf
+                                <button class="btn btn-sm btn-success mt-2" type="submit">Сохранить</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <span class="fw-bold">Адрес доставки:</span>
+                        <span>{{ $user->address ?? 'Не указан' }}</span>
+                        <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapse-address" aria-expanded="@error('address') true @else false @enderror"
+                                aria-controls="collapse-address">
+                            Изменить
+                        </button>
+
+                        <div class="collapse @error('address') show @enderror" id="collapse-address">
+                            <form action="{{ route('user.userChangeAddress') }}" method="POST">
+                                <label for="changeInputAddress" class="form-label" hidden></label>
+                                <input type="text" class="form-control mt-1 @error('address') is-invalid @enderror"
+                                       id="changeInputAddress" name="address" placeholder="г. Екатеринбург, ул. Крауля, д. 168, к. 2, кв. 111" value="{{ old('address') }}">
+
+                                @error('address')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+
+                                @csrf
+                                <button class="btn btn-sm btn-success mt-2" type="submit">Сохранить</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <span class="fw-bold">Номер телефона:</span>
+                        <span>{{ phoneToFormat($user->phone_number) ?? 'Не указан' }}</span>
+                        <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapse-phone_number" aria-expanded="@error('phone_number') true @else false @enderror"
+                                aria-controls="collapse-phone_number">
+                            Изменить
+                        </button>
+
+                        <div class="collapse @error('phone_number') show @enderror" id="collapse-phone_number">
+                            <form action="{{ route('user.userChangePhone') }}" method="POST">
+                                <label for="changeInputPhone" class="form-label" hidden></label>
+                                <input type="text" class="form-control mt-1 @error('phone_number') is-invalid @enderror"
+                                       id="changeInputPhone" name="phone_number" placeholder="Введите номер телефона (+7 | 8)" value="{{ old('phone_number') }}">
+
+                                @error('phone_number')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+
+                                @csrf
+                                <button class="btn btn-sm btn-success mt-2" type="submit">Сохранить</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
