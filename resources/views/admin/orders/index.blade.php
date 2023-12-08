@@ -53,7 +53,7 @@
                     </td>
                     <td>
                         <a href="#" class="cart-content-title">
-                            {{ $order->user->full_name }}
+                            {{ $order->user->username }}
                         </a>
                     </td>
                 </tr>

@@ -43,6 +43,10 @@
                                         <li class="dropdown-header" style="color: var(--accent-color)">{{ auth()->user()->username }}</li>
                                         <li><a class="dropdown-item" href="{{ route('user.userOrders') }}">Мои заказы</a></li>
                                         <li><a class="dropdown-item" href="{{ route('user.userSettings') }}">Настройки</a></li>
+
+                                        @if(auth()->user()->isAdmin())
+                                            <li><a class="dropdown-item" href="{{ route('admin-users') }}">Панель администратора</a></li>
+                                        @endif
                                     </ul>
                                 </div>
                             <a href="{{ route('user.logout') }}">
@@ -102,3 +106,12 @@
     </nav>
 </div>
 {{-- <div class="header-bottom"></div> --}}
+
+ @if(session()->has('warning'))
+     <p class="alert alert-danger text-center m-1">{{ session()->get('warning') }}</p>
+ @endif
+
+ @if(session()->has('success'))
+     <p class="alert alert-success text-center m-1">{{ session()->get('success') }}</p>
+ @endif
+

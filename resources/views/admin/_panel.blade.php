@@ -31,7 +31,7 @@
                     <i class='bx bx-cart nav_icon'></i>
                     <span class="nav_name">Товары</span>
                 </a>
-                <a href="{{ route('admin-categories') }}" class="nav_link" id="categories">
+                <a href="{{ route('categories.index') }}" class="nav_link" id="categories">
                     <i class='bx bx-category nav_icon'></i>
                     <span class="nav_name">Категории</span>
                 </a>

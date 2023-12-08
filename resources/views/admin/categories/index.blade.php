@@ -9,6 +9,7 @@
                 <th>#</th>
                 <th>Код</th>
                 <th>Название</th>
+                <th class="text-center">Действия</th>
             </tr>
             </thead>
             <tbody>
@@ -29,9 +30,18 @@
                             {{ $category->title }}
                         </a>
                     </td>
+                    <td class="text-center">
+                        <a href="#" role="button" class="btn btn-sm btn-outline-secondary">
+                            <i class="fa-solid fa-pencil"></i>
+                        </a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
+
+        <a href="#" role="button" class="btn btn-sm btn-primary">
+            <i class="fa-solid fa-plus"></i> Добавить
+        </a>
     </div>
 @endsection

@@ -59,9 +59,15 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
+    public function isAdmin() {
+        return $this->role->title === 'administrator';
+    }
+
     public function saveName($name) {
         $this->username = $name;
         $this->save();
+
+        session()->flash('success', 'Имя успешно изменено');
 
         return true;
     }
@@ -70,6 +76,8 @@ class User extends Authenticatable
         $this->email = $email;
         $this->save();
 
+        session()->flash('success', 'Почта успешно изменена');
+
         return true;
     }
 
@@ -77,12 +85,16 @@ class User extends Authenticatable
         $this->password = $password;
         $this->save();
 
+        session()->flash('success', 'Пароль успешно изменен');
+
         return true;
     }
 
     public function saveAddress($address) {
         $this->address = $address;
         $this->save();
+
+        session()->flash('success', 'Адрес доставки успешно изменен');
 
         return true;
     }
@@ -96,6 +108,8 @@ class User extends Authenticatable
 
         $this->phone_number = $phone;
         $this->save();
+
+        session()->flash('success', 'Номер телефона успешно изменен');
 
         return true;
     }

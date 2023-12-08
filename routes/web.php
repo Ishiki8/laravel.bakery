@@ -20,12 +20,12 @@ Route::get('/category/{code}', [Controllers\MainController::class, 'category'])-
 Route::get('/search', [Controllers\MainController::class, 'search'])->name('search');
 Route::get('/product/{code}', [Controllers\MainController::class, 'product'])->name('product');
 
-Route::controller(Controllers\CartController::class)->group(function() {
-    Route::get('/cart',  'cart')->name('cart');
-    Route::post('/cart/add/{id}', 'cartAdd')->name('cart-add');
-    Route::post('/cart/remove/{id}', 'cartRemove')->name('cart-remove');
-    Route::get('/cart/confirm', 'cartConfirm')->name('cart-confirm');
-    Route::post('/cart/confirm', 'cartConfirmAdd')->name('cart-confirm-add');
+Route::controller(Controllers\CartController::class)->prefix('cart')->group(function() {
+    Route::get('/',  'cart')->name('cart');
+    Route::post('/add/{id}', 'cartAdd')->name('cart-add');
+    Route::post('/remove/{id}', 'cartRemove')->name('cart-remove');
+    Route::get('/confirm', 'cartConfirm')->name('cart-confirm');
+    Route::post('/confirm', 'cartConfirmAdd')->name('cart-confirm-add');
 });
 
 Route::name('user.')->group(function() {
@@ -34,27 +34,32 @@ Route::name('user.')->group(function() {
 
     Route::get('/logout', function() {
         Auth::logout();
-
         return redirect(route('index'));
     })->name('logout');
 
     Route::get('/registration', [Controllers\Auth\RegistrationController::class, 'registrationView'])->name('registration');
     Route::post('/registration', [Controllers\Auth\RegistrationController::class, 'register']);
 
-    Route::get('/orders', [Controllers\MainController::class, 'userOrdersView'])->name('userOrders');
+    Route::group(['middleware' => 'auth'], function () {
+        Route::get('/settings', [Controllers\Auth\SettingsController::class, 'userSettingsView'])->name('userSettings');
+        Route::post('/settings/change/name', [Controllers\Auth\SettingsController::class, 'changeName'])->name('userChangeName');
+        Route::post('/settings/change/email', [Controllers\Auth\SettingsController::class, 'changeEmail'])->name('userChangeEmail');
+        Route::post('/settings/change/password', [Controllers\Auth\SettingsController::class, 'changePassword'])->name('userChangePassword');
+        Route::post('/settings/change/address', [Controllers\Auth\SettingsController::class, 'changeAddress'])->name('userChangeAddress');
+        Route::post('/settings/change/phone', [Controllers\Auth\SettingsController::class, 'changePhone'])->name('userChangePhone');
 
-    Route::get('/settings', [Controllers\Auth\SettingsController::class, 'userSettingsView'])->name('userSettings');
-    Route::post('/settings/change/name', [Controllers\Auth\SettingsController::class, 'changeName'])->name('userChangeName');
-    Route::post('/settings/change/email', [Controllers\Auth\SettingsController::class, 'changeEmail'])->name('userChangeEmail');
-    Route::post('/settings/change/password', [Controllers\Auth\SettingsController::class, 'changePassword'])->name('userChangePassword');
-    Route::post('/settings/change/address', [Controllers\Auth\SettingsController::class, 'changeAddress'])->name('userChangeAddress');
-    Route::post('/settings/change/phone', [Controllers\Auth\SettingsController::class, 'changePhone'])->name('userChangePhone');
+        Route::get('/orders', [Controllers\MainController::class, 'userOrdersView'])->name('userOrders');
+    });
 });
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/admin/users', [Controllers\Admin\UsersController::class, 'users'])->name('admin-users');
-    Route::get('/admin/products', [Controllers\Admin\ProductsController::class, 'products'])->name('admin-products');
-    Route::get('/admin/orders', [Controllers\Admin\OrdersController::class, 'orders'])->name('admin-orders');
-    Route::get('/admin/categories', [Controllers\Admin\CategoriesController::class, 'categories'])->name('admin-categories');
+    Route::group(['middleware' => 'is_admin', 'prefix' => 'admin'], function () {
+        Route::get('/users', [Controllers\Admin\UsersController::class, 'users'])->name('admin-users');
+        Route::get('/products', [Controllers\Admin\ProductsController::class, 'products'])->name('admin-products');
+        Route::get('/orders', [Controllers\Admin\OrdersController::class, 'orders'])->name('admin-orders');
+//        Route::get('/categories', [Controllers\Admin\CategoriesController::class, 'index'])->name('admin-categories');
+
+        Route::resource('categories', App\Http\Controllers\Admin\CategoriesController::class);
+    });
 });
 

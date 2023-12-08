@@ -25,7 +25,7 @@
                     </td>
                     <td>
                         <a href="#" class="cart-content-title">
-                            {{ $user->full_name }}
+                            {{ $user->username }}
                         </a>
                     </td>
                     <td>
