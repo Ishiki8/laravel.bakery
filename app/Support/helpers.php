@@ -1,5 +1,12 @@
 <?php
 
+const STATUSES = [
+    1 => 'В работе',
+    2 => 'Доставка',
+    3 => 'Получен',
+    4 => 'Отменен'
+];
+
 if (!function_exists('phoneToFormat')) {
     function phoneToFormat($text) {
         if (is_null($text)) {

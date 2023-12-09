@@ -45,7 +45,7 @@
                                         <li><a class="dropdown-item" href="{{ route('user.userSettings') }}">Настройки</a></li>
 
                                         @if(auth()->user()->isAdmin())
-                                            <li><a class="dropdown-item" href="{{ route('admin-users') }}">Панель администратора</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('users.index') }}">Панель администратора</a></li>
                                         @endif
                                     </ul>
                                 </div>

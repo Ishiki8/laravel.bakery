@@ -1,12 +1,3 @@
-@php
-    $statuses = [
-        1 => 'В работе',
-        2 => 'Доставка',
-        3 => 'Получен',
-        4 => 'Отменен'
-    ]
-@endphp
-
 @extends('layouts._layout')
 
 @section('title', 'Мои заказы')
@@ -39,7 +30,7 @@
                             <br>
                             <span>Сумма заказа: {{ $order->price }} руб.</span>
                             <br>
-                            <span>Статус: <strong>{{ $statuses[$order->status] }}</strong></span>
+                            <span>Статус: <strong>{{ STATUSES[$order->status] }}</strong></span>
                             <br>
                             <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{$order->id}}" aria-expanded="false" aria-controls="collapse-{{$order->id}}">
                                 Состав заказа

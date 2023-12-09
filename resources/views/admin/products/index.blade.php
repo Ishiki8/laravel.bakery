@@ -10,58 +10,52 @@
                 <th>Код</th>
                 <th>Название</th>
                 <th>Изображение</th>
-                <th>Описание</th>
+                <th class="col-sm-2">Описание</th>
                 <th>Вес</th>
                 <th>Цена</th>
                 <th>Категория</th>
+                <th class="text-center">Действия</th>
             </tr>
             </thead>
             <tbody>
             @foreach($products as $product)
                 <tr>
                     <td>
-                        <a href="#" class="cart-content-title">
-                            {{ $product->id }}
-                        </a>
+                        {{ $product->id }}
                     </td>
                     <td>
-                        <a href="#" class="cart-content-title">
-                            {{ $product->code }}
-                        </a>
+                        {{ $product->code }}
                     </td>
                     <td>
-                        <a href="#" class="cart-content-title">
-                            {{ $product->title }}
-                        </a>
+                        {{ $product->title }}
                     </td>
                     <td>
-                        <a href="#" class="cart-content-title">
-                            {{ $product->image }}
-                        </a>
+                        <img src="{{ $product->image }}" alt="{{ $product->code }}" class="admin-product-img">
                     </td>
                     <td>
-                        <a href="#" class="cart-content-title">
-                            {{ $product->description }}
-                        </a>
+                        {{ $product->description }}
                     </td>
                     <td>
-                        <a href="#" class="cart-content-title">
-                            {{ $product->weight }}
-                        </a>
+                        {{ $product->weight }}
                     </td>
                     <td>
-                        <a href="#" class="cart-content-title">
-                            {{ $product->price }}
-                        </a>
+                        {{ $product->price }}
                     </td>
                     <td>
-                        <a href="#" class="cart-content-title">
-                            {{ $product->category->title }}
+                        {{ $product->category->title }}
+                    </td>
+                    <td class="text-center">
+                        <a href="{{ route('products.edit', $product) }}" role="button" class="btn btn-sm btn-outline-secondary">
+                            <i class="fa-solid fa-pencil"></i>
                         </a>
                     </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
+
+        <a href="{{ route('products.create') }}" role="button" class="btn btn-sm btn-primary mb-1">
+            <i class="fa-solid fa-plus"></i> Добавить
+        </a>
     </div>
 @endsection

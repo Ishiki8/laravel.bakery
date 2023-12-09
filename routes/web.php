@@ -54,12 +54,27 @@ Route::name('user.')->group(function() {
 
 Route::group(['middleware' => 'auth'], function() {
     Route::group(['middleware' => 'is_admin', 'prefix' => 'admin'], function () {
-        Route::get('/users', [Controllers\Admin\UsersController::class, 'users'])->name('admin-users');
-        Route::get('/products', [Controllers\Admin\ProductsController::class, 'products'])->name('admin-products');
-        Route::get('/orders', [Controllers\Admin\OrdersController::class, 'orders'])->name('admin-orders');
-//        Route::get('/categories', [Controllers\Admin\CategoriesController::class, 'index'])->name('admin-categories');
+        Route::resource('users', App\Http\Controllers\Admin\UsersController::class)->except([
+            'edit', 'update', 'show', 'destroy'
+        ]);
 
-        Route::resource('categories', App\Http\Controllers\Admin\CategoriesController::class);
+        Route::resource('orders', App\Http\Controllers\Admin\OrdersController::class)->except([
+            'create', 'store', 'show', 'destroy'
+        ]);
+
+        Route::resource('products', App\Http\Controllers\Admin\ProductsController::class)->except([
+            'show', 'destroy'
+        ]);
+
+        Route::resource('categories', App\Http\Controllers\Admin\CategoriesController::class)->except([
+            'show', 'destroy'
+        ]);
     });
 });
+
+
+
+
+
+
 

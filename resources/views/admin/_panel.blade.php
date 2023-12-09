@@ -19,15 +19,15 @@
             </a>
 
             <div class="nav_list">
-                <a href="{{ route('admin-users') }}" class="nav_link" id="users">
+                <a href="{{ route('users.index') }}" class="nav_link" id="users">
                     <i class='bx bx-user nav_icon'></i>
                     <span class="nav_name">Пользователи</span>
                 </a>
-                <a href="{{ route('admin-orders') }}" class="nav_link" id="orders">
+                <a href="{{ route('orders.index') }}" class="nav_link" id="orders">
                     <i class='bx bx-money-withdraw nav_icon'></i>
                     <span class="nav_name">Заказы</span>
                 </a>
-                <a href="{{ route('admin-products') }}" class="nav_link" id="products">
+                <a href="{{ route('products.index') }}" class="nav_link" id="products">
                     <i class='bx bx-cart nav_icon'></i>
                     <span class="nav_name">Товары</span>
                 </a>
@@ -73,8 +73,12 @@
                 })
             }
 
-            const currentCategory = document.getElementById(window.location.pathname.split('/').at(-1));
-            currentCategory.classList.add('active')
+            const currentCategory = document.getElementById(window.location.pathname.split('/')[2]);
+
+            if (currentCategory) {
+                currentCategory.classList.add('active')
+            }
+
         }
 
         showNavbar('header-toggle', 'nav-bar', 'body-pd', 'header')

@@ -421,3 +421,8 @@ label.required::before {
 }
 
 /* ============================= Validation ============================= */
+
+
+.admin-product-img {
+    max-width: 50px !important;
+}

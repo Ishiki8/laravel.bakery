@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CartRequest;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,7 +45,7 @@ class CartController extends Controller
         return redirect(route('user.login'));
     }
 
-    public function cartConfirmAdd(Request $request) {
+    public function cartConfirmAdd(CartRequest $request) {
         $orderId = session('orderId');
 
         if (is_null($orderId)) {
@@ -52,20 +53,8 @@ class CartController extends Controller
         }
 
         $order = Order::find($orderId);
+        $order->saveOrder($request->get('address'), $request->get('phone'));
 
-        $messages = [
-            'required' => 'Поле должно быть заполнено',
-            'max' => 'Не более 200 символов',
-            'address.regex' => 'Некорректный формат адреса',
-            'phone.regex' => 'Некорректный формат номера телефона'
-        ];
-
-        $validateFields = $request->validate([
-            'address' => ['required', 'string', 'regex:/^г\.\s+Екатеринбург,\s+ул\.\s+[a-zA-Zа-яА-ЯёЁ\s]+,\s+д\.\s+\d+(,\s+к\.\s+\d+)?(,\s+кв\.\s+\d+)?$/u', 'max:200'],
-            'phone' => ['required', 'string', 'regex:/^(\+7|8)\d{3}\d{3}\d{2}\d{2}$/i']
-        ], $messages);
-
-        $order->saveOrder($validateFields['address'], $validateFields['phone']);
         return redirect(route('index'));
     }
 

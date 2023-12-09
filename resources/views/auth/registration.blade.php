@@ -24,7 +24,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="registrationInputEmail" class="form-label">Почта</label>
-                                    <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                    <input type="text" class="form-control @error('email') is-invalid @enderror"
                                            id="registrationInputEmail" name="email" placeholder="Email" value="{{ old('email') }}">
 
                                     @error('email')

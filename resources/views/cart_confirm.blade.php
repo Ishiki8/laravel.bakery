@@ -16,7 +16,7 @@
                                 <div class="mb-3">
                                     <label for="cartInputAddress" class="form-label required">Адрес доставки</label>
                                     <input type="text" class="form-control mt-1 @error('address') is-invalid @enderror"
-                                           id="cartInputAddress" name="address" placeholder="г. Екатеринбург, ул. Крауля, д. 168, к. 2, кв. 111" value="{{ $address ?? old('address') }}">
+                                           id="cartInputAddress" name="address" placeholder="г. Екатеринбург, ул. Крауля, д. 168, к. 2, кв. 111" value="{{ old('address') ?? $address ?? '' }}">
 
                                     @error('address')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -25,7 +25,7 @@
                                 <div class="mb-3">
                                     <label for="cartInputPhone" class="form-label required">Номер телефона</label>
                                     <input type="text" class="form-control mt-1 @error('phone') is-invalid @enderror"
-                                           id="cartInputPhone" name="phone" placeholder="Введите номер телефона (+7 | 8)" value="@if($phone)+@endif{{ $phone ?? old('phone') }}">
+                                           id="cartInputPhone" name="phone" placeholder="Введите номер телефона (+7 | 8)" value="@if($phone && !old('phone'))+@endif{{ old('phone') ?? $phone ?? '' }}">
 
                                     @error('phone')
                                     <div class="invalid-feedback">{{ $message }}</div>

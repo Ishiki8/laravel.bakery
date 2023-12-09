@@ -1,12 +1,3 @@
-@php
-    $statuses = [
-        1 => 'В работе',
-        2 => 'Доставка',
-        3 => 'Получен',
-        4 => 'Отменен'
-    ]
-@endphp
-
 @extends('admin._panel')
 
 @section('content')
@@ -21,39 +12,34 @@
                 <th>Номер телефона</th>
                 <th>Адрес доставки</th>
                 <th>Заказчик</th>
+                <th class="text-center">Действия</th>
+
             </tr>
             </thead>
             <tbody>
             @foreach($orders as $order)
                 <tr>
                     <td>
-                        <a href="#" class="cart-content-title">
-                            {{ $order->id }}
-                        </a>
+                        {{ $order->id }}
                     </td>
                     <td>
-                        <a href="#" class="cart-content-title">
-                            {{ \Carbon\Carbon::parse($order->date)->setTimezone('Asia/Yekaterinburg')->format('H:i d.m.Y') }}
-                        </a>
+                        {{ \Carbon\Carbon::parse($order->date)->setTimezone('Asia/Yekaterinburg')->format('d.m.Y в H:i') }}
                     </td>
                     <td>
-                        <a href="#" class="cart-content-title">
-                            {{ $statuses[$order->status] }}
-                        </a>
+                        {{ STATUSES[$order->status] }}
                     </td>
                     <td>
-                        <a href="#" class="cart-content-title">
-                            {{ $order->client_phone }}
-                        </a>
+                        {{ $order->client_phone }}
                     </td>
                     <td>
-                        <a href="#" class="cart-content-title">
-                            {{ $order->client_address }}
-                        </a>
+                        {{ $order->client_address }}
                     </td>
                     <td>
-                        <a href="#" class="cart-content-title">
-                            {{ $order->user->username }}
+                        {{ $order->user->username }}
+                    </td>
+                    <td class="text-center">
+                        <a href="{{ route('orders.edit', $order) }}" role="button" class="btn btn-sm btn-outline-secondary">
+                            <i class="fa-solid fa-pencil"></i>
                         </a>
                     </td>
                 </tr>

@@ -15,6 +15,7 @@ class Order extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    protected $fillable = ['status'];
 
     public function products() {
         return $this->belongsToMany(Product::class)->withPivot('quantity');

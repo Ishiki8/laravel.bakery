@@ -7,7 +7,7 @@
             <thead class="table-dark">
             <tr>
                 <th>#</th>
-                <th>ФИО</th>
+                <th>Имя</th>
                 <th>Почта</th>
                 <th>Пароль</th>
                 <th>Адрес доставки</th>
@@ -19,43 +19,33 @@
             @foreach($users as $user)
                 <tr>
                     <td>
-                        <a href="#" class="cart-content-title">
-                            {{ $user->id }}
-                        </a>
+                        {{ $user->id }}
                     </td>
                     <td>
-                        <a href="#" class="cart-content-title">
-                            {{ $user->username }}
-                        </a>
+                        {{ $user->username }}
                     </td>
                     <td>
-                        <a href="#" class="cart-content-title">
-                            {{ $user->email }}
-                        </a>
+                        {{ $user->email }}
                     </td>
                     <td>
-                        <a href="#" class="cart-content-title">
-                            ********
-                        </a>
+                        ********
                     </td>
                     <td>
-                        <a href="#" class="cart-content-title">
-                            {{ $user->address ?? 'Не указан' }}
-                        </a>
+                        {{ $user->address ?? 'Не указан' }}
                     </td>
                     <td>
-                        <a href="#" class="cart-content-title">
-                            {{ $user->phone_number ?? 'Не указан' }}
-                        </a>
+                        {{ $user->phone_number ?? 'Не указан' }}
                     </td>
                     <td>
-                        <a href="#" class="cart-content-title">
-                            {{ $user->role->title }}
-                        </a>
+                        {{ $user->role->title }}
                     </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
+
+        <a href="{{ route('users.create') }}" role="button" class="btn btn-sm btn-primary mb-1">
+            <i class="fa-solid fa-plus"></i> Добавить
+        </a>
     </div>
 @endsection

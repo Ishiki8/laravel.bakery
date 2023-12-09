@@ -16,22 +16,16 @@
             @foreach($categories as $category)
                 <tr>
                     <td>
-                        <a href="#" class="cart-content-title">
-                            {{ $category->id }}
-                        </a>
+                        {{ $category->id }}
                     </td>
                     <td>
-                        <a href="#" class="cart-content-title">
-                            {{ $category->code }}
-                        </a>
+                        {{ $category->code }}
                     </td>
                     <td>
-                        <a href="#" class="cart-content-title">
-                            {{ $category->title }}
-                        </a>
+                        {{ $category->title }}
                     </td>
                     <td class="text-center">
-                        <a href="#" role="button" class="btn btn-sm btn-outline-secondary">
+                        <a href="{{ route('categories.edit', $category) }}" role="button" class="btn btn-sm btn-outline-secondary">
                             <i class="fa-solid fa-pencil"></i>
                         </a>
                     </td>
@@ -40,7 +34,7 @@
             </tbody>
         </table>
 
-        <a href="#" role="button" class="btn btn-sm btn-primary">
+        <a href="{{ route('categories.create') }}" role="button" class="btn btn-sm btn-primary mb-1">
             <i class="fa-solid fa-plus"></i> Добавить
         </a>
     </div>
