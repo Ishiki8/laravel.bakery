@@ -7,6 +7,7 @@
             <h4>
                 <a href="{{ route('product', $product_code) }}">{{ $product_title }}</a>
             </h4>
+            <p style="color: var(--accent-color)">{{ $product_category }}</p>
             <p class="product-excerpt">{{ $product_description }}</p>
             <div class="product-bottom-details d-flex justify-content-between">
                 <div class="product-price">

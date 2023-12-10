@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('code', 50)->unique();
             $table->string('title', 50)->unique();
             $table->string('image')->nullable();
-            $table->unsignedDecimal('weight', 6)->default(0);
+            $table->unsignedDecimal('weight', 6);
             $table->string('description', 500)->nullable();
-            $table->unsignedDecimal('price', 6)->default(0);
+            $table->unsignedDecimal('price', 6);
             $table->unsignedBigInteger('category_id')->index();
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

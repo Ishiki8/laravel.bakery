@@ -14,26 +14,25 @@
             </div>
 
             <div class="row ">
-                @foreach($products as $product)
-                    @include('product_card', [
-                        'product_image' => $product->image,
-                        'product_code' => $product->code,
-                        'product_title' => $product->title,
-                        'product_description' => $product->description,
-                        'product_price' => $product->price
-                    ])
-                @endforeach
-{{--                @for($i = 0; $i < 8; $i++)--}}
-{{--                    @include('product_card', [--}}
-{{--                        'product_image' => asset('img/products/baton1.jpg'),--}}
-{{--                        'product_title' => 'Батонище',--}}
-{{--                        'product_description' => 'Вкуснятина-то какая!',--}}
-{{--                        'product_price' => 200--}}
-{{--                    ])--}}
-{{--                @endfor--}}
+                @if($products->isEmpty())
+                    <span class="fs-3">Ничего не найдено по вашему запросу...</span>
+                @else
+                    @foreach($products as $product)
+                        @include('product_card', [
+                            'product_image' => $product->image,
+                            'product_code' => $product->code,
+                            'product_title' => $product->title,
+                            'product_description' => $product->description,
+                            'product_price' => $product->price,
+                            'product_category' => $product->category->title
+                        ])
+                    @endforeach
+                @endif
             </div>
 
-            @include('layouts.pagination')
+            @if(!$products->isEmpty())
+                {{ $products->links() }}
+            @endif
         </div>
     </main>
 @endsection

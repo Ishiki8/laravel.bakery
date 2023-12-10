@@ -53,9 +53,13 @@
             @endforeach
             </tbody>
         </table>
-
-        <a href="{{ route('products.create') }}" role="button" class="btn btn-sm btn-primary mb-1">
-            <i class="fa-solid fa-plus"></i> Добавить
-        </a>
     </div>
+
+    <a href="{{ route('products.create') }}" role="button" class="btn btn-sm btn-primary mb-1">
+        <i class="fa-solid fa-plus"></i> Добавить
+    </a>
+
+    @if(!$products->isEmpty())
+        {{ $products->links() }}
+    @endif
 @endsection

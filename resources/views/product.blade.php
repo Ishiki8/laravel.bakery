@@ -17,8 +17,11 @@
                 <div class="col-md-7 col-lg-8 mb-3">
                     <div class="bg-white product-content p-3 h-100">
                         <h1 class="section-title h3"><span class="ps-0">{{ $product->title }}</span></h1>
+                        <p style="color: var(--accent-color)">{{ $product->category->title }}</p>
 
-                        <p class="product-excerpt">{{ $product->description }}</p>
+                        @isset($product->description)<p>Описание: {{ $product->description }}</p>@endisset
+
+                        <p>Вес: {{ $product->weight }} г./шт.</p>
 
                         <div class="product-price">
                             {{ $product->price }} руб.

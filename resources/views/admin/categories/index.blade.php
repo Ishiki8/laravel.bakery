@@ -33,9 +33,13 @@
             @endforeach
             </tbody>
         </table>
-
-        <a href="{{ route('categories.create') }}" role="button" class="btn btn-sm btn-primary mb-1">
-            <i class="fa-solid fa-plus"></i> Добавить
-        </a>
     </div>
+
+    <a href="{{ route('categories.create') }}" role="button" class="btn btn-sm btn-primary mb-1">
+        <i class="fa-solid fa-plus"></i> Добавить
+    </a>
+
+    @if(!$categories->isEmpty())
+        {{ $categories->links() }}
+    @endif
 @endsection

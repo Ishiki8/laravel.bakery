@@ -43,9 +43,13 @@
             @endforeach
             </tbody>
         </table>
-
-        <a href="{{ route('users.create') }}" role="button" class="btn btn-sm btn-primary mb-1">
-            <i class="fa-solid fa-plus"></i> Добавить
-        </a>
     </div>
+
+    <a href="{{ route('users.create') }}" role="button" class="btn btn-sm btn-primary mb-1">
+        <i class="fa-solid fa-plus"></i> Добавить
+    </a>
+
+    @if(!$users->isEmpty())
+        {{ $users->links() }}
+    @endif
 @endsection

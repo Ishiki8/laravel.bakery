@@ -12,18 +12,23 @@ use Illuminate\Support\Facades\Auth;
 class MainController extends Controller
 {
     public function index() {
+        $categories = Category::get();
+
         return view('index')->with([
-            'categories' => $this->categories(),
+            'categories' => $categories,
             'products' => $this->products(8)
         ]);
     }
 
     public function category($code) {
         $category = Category::where('code', $code)->first();
+        $categories = Category::get();
+        $products = $category->products()->paginate(4);
 
         return view('category')->with([
             'category' => $category,
-            'categories' => $this->categories()
+            'categories' => $categories,
+            'products' => $products
         ]);
     }
 
@@ -32,16 +37,13 @@ class MainController extends Controller
         return $limit ? $products->slice(0, $limit) : $products;
     }
 
-    public function categories() {
-        return Category::get();
-    }
-
     public function userOrdersView() {
         $orders = Order::where('user_id', '=', auth()->id())->get()->sortDesc();
+        $categories = Category::get();
 
         return view('auth.user_orders')->with([
             'orders' => $orders,
-            'categories' => Category::get(),
+            'categories' => $categories
         ]);
     }
 
@@ -52,21 +54,23 @@ class MainController extends Controller
 
         $products = Product::where('title', 'like', '%' . $_GET['search'] . '%')
             ->orWhere('description', 'like', '%' . $_GET['search'] . '%')
-            ->get()
-            ->sortDesc();
+            ->paginate(4)->appends(['search' => $_GET['search']]);
+
+        $categories = Category::get();
 
         return view('search')->with([
             'products' => $products,
-            'categories' => $this->categories()
+            'categories' => $categories
         ]);
     }
 
     public function product($code) {
         $product = Product::where('code', $code)->first();
+        $categories = Category::get();
 
         return view('product')->with([
             'product' => $product,
-            'categories' => $this->categories()
+            'categories' => $categories
         ]);
     }
 

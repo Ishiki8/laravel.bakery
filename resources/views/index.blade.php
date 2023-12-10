@@ -77,7 +77,8 @@
                             'product_image' => $product->image,
                             'product_title' => $product->title,
                             'product_description' => $product->description,
-                            'product_price' => $product->price
+                            'product_price' => $product->price,
+                            'product_category' => $product->category->title
                         ])
                     @endforeach
                 </div>

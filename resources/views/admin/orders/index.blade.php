@@ -47,4 +47,8 @@
             </tbody>
         </table>
     </div>
+
+    @if(!$orders->isEmpty())
+        {{ $orders->links() }}
+    @endif
 @endsection

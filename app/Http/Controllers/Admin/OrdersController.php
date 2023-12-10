@@ -13,7 +13,7 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        $orders = Order::where('status', '!=', 0)->get();
+        $orders = Order::where('status', '!=', 0)->paginate(10);
 
         return view('admin.orders.index')->with([
             'orders' => $orders

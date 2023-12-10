@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CartRequest;
+use App\Models\Category;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,13 +13,10 @@ class CartController extends Controller
     public function cart() {
         $orderId = session('orderId');
         $order = Order::find($orderId);
-
-//        if (!is_null($orderId)) {
-//
-//        }
+        $categories = Category::get();
 
         return view('cart')->with([
-            'categories' => (new MainController())->categories(),
+            'categories' => $categories,
             'order' => $order,
         ]);
     }
@@ -33,9 +31,10 @@ class CartController extends Controller
 
             $user = auth()->user();
             $order = Order::find($orderId);
+            $categories = Category::get();
 
             return view('cart_confirm')->with([
-                'categories' => (new MainController())->categories(),
+                'categories' => $categories,
                 'order' => $order,
                 'address' => $user->address,
                 'phone' => $user->phone_number
