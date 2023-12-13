@@ -29,7 +29,7 @@
                 </a>
                 <a href="{{ route('products.index') }}" class="nav_link" id="products">
                     <i class='bx bx-cart nav_icon'></i>
-                    <span class="nav_name">Товары</span>
+                    <span class="nav_name">Продукция</span>
                 </a>
                 <a href="{{ route('categories.index') }}" class="nav_link" id="categories">
                     <i class='bx bx-category nav_icon'></i>

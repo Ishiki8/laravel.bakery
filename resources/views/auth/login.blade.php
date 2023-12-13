@@ -14,12 +14,12 @@
                         <div class="col-md-6 offset-md-3">
                             <form action="{{ route('user.login') }}" method="POST">
                                 <div class="mb-3">
-                                    <label for="loginInputEmail" class="form-label">Почта</label>
+                                    <label for="loginInputEmail" class="form-label required">Почта</label>
                                     <input type="email" class="form-control @error('formError') is-invalid @enderror"
                                            id="loginInputEmail" name="email" placeholder="Email">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="loginInputPassword" class="form-label">Пароль</label>
+                                    <label for="loginInputPassword" class="form-label required">Пароль</label>
                                     <input type="password" class="form-control @error('formError') is-invalid @enderror"
                                            id="loginInputPassword" name="password" placeholder="Пароль">
                                     @error('formError')

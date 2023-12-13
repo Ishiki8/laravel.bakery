@@ -15,7 +15,7 @@
         @endisset
 
         <div class="mb-3 col-xl-5 col-lg-7 col-md-9">
-            <label for="productInputCode" class="form-label">Код</label>
+            <label for="productInputCode" class="form-label required">Код</label>
             <input type="text" class="form-control @error('code') is-invalid @enderror"
                    id="productInputCode" name="code" placeholder="Код продукции" value="{{ old('code') ?? $product->code ?? '' }}">
 
@@ -24,7 +24,7 @@
             @enderror
         </div>
         <div class="mb-3 col-xl-5 col-lg-7 col-md-9">
-            <label for="productInputTitle" class="form-label">Название</label>
+            <label for="productInputTitle" class="form-label required">Название</label>
             <input type="text" class="form-control @error('title') is-invalid @enderror"
                    id="productInputTitle" name="title" placeholder="Название продукции" value="{{ old('title') ?? $product->title ?? '' }}">
 
@@ -52,7 +52,7 @@
             @enderror
         </div>
         <div class="mb-3 col-xl-5 col-lg-7 col-md-9">
-            <label for="productInputWeight" class="form-label">Вес</label>
+            <label for="productInputWeight" class="form-label required">Вес</label>
             <input type="text" class="form-control @error('weight') is-invalid @enderror"
                    id="productInputWeight" name="weight" placeholder="Вес продукции" value="{{ old('weight') ?? $product->weight ?? '' }}">
 
@@ -61,7 +61,7 @@
             @enderror
         </div>
         <div class="mb-3 col-xl-5 col-lg-7 col-md-9">
-            <label for="productInputPrice" class="form-label">Цена</label>
+            <label for="productInputPrice" class="form-label required">Цена</label>
             <input type="text" class="form-control @error('price') is-invalid @enderror"
                    id="productInputPrice" name="price" placeholder="Цена продукции" value="{{ old('price') ?? $product->price ?? '' }}">
 

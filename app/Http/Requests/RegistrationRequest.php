@@ -32,6 +32,7 @@ class RegistrationRequest extends FormRequest
         return [
             'required' => 'Поле должно быть заполнено',
             'max' => 'Не более 50 символов',
+            'email' => 'Некорректный формат email',
             'email.unique' => 'Пользователь с таким email уже зарегистрирован',
             'password.min' => 'Не менее 8 символов',
             'password.max' => 'Не более 64 символов',

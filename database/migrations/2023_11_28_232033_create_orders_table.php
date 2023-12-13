@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->timestamp('date')->useCurrent();
-            $table->unsignedDecimal('price')->nullable();
+            $table->unsignedDecimal('price', 9)->nullable();
             $table->unsignedTinyInteger('status')->default(0);
             $table->string('client_phone', 11)->nullable();
             $table->string('client_address', 200)->nullable();

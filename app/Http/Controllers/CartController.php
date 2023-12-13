@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CartRequest;
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,6 +24,10 @@ class CartController extends Controller
 
     public function cartConfirm() {
         if (Auth::check()) {
+            if (Product::countProductsInCart() === 0) {
+                return redirect(route('cart'));
+            }
+
             $orderId = session('orderId');
 
             if (is_null($orderId)) {
@@ -54,7 +59,7 @@ class CartController extends Controller
         $order = Order::find($orderId);
         $order->saveOrder($request->get('address'), $request->get('phone'));
 
-        return redirect(route('index'));
+        return redirect(route('user.userOrders'));
     }
 
     public function cartAdd($productId) {

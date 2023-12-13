@@ -5,7 +5,7 @@
 
     <form method="POST" action="{{ route('users.store') }}">
         <div class="mb-3 col-xl-5 col-lg-7 col-md-9">
-            <label for="userInputName" class="form-label">Имя</label>
+            <label for="userInputName" class="form-label required">Имя</label>
             <input type="text" class="form-control @error('username') is-invalid @enderror"
                    id="userInputName" name="username" placeholder="Имя пользователя" value="{{ old('username') }}">
 
@@ -14,7 +14,7 @@
             @enderror
         </div>
         <div class="mb-3 col-xl-5 col-lg-7 col-md-9">
-            <label for="userInputEmail" class="form-label">Почта</label>
+            <label for="userInputEmail" class="form-label required">Почта</label>
             <input type="text" class="form-control @error('email') is-invalid @enderror"
                    id="userInputEmail" name="email" placeholder="Email" value="{{ old('email') }}">
 
@@ -23,7 +23,7 @@
             @enderror
         </div>
         <div class="mb-3 col-xl-5 col-lg-7 col-md-9">
-            <label for="userInputPassword" class="form-label">Пароль</label>
+            <label for="userInputPassword" class="form-label required">Пароль</label>
             <input type="password" class="form-control @error('password') is-invalid @enderror"
                    id="userInputPassword" name="password" placeholder="Пароль">
 

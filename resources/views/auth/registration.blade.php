@@ -14,7 +14,7 @@
                         <div class="col-md-6 offset-md-3">
                             <form action="{{ route('user.registration') }}" method="POST">
                                 <div class="mb-3">
-                                    <label for="registrationInputUsername" class="form-label">Имя</label>
+                                    <label for="registrationInputUsername" class="form-label required">Имя</label>
                                     <input type="text" class="form-control @error('username') is-invalid @enderror"
                                            id="registrationInputUsername" name="username" placeholder="Имя пользователя" value="{{ old('username') }}">
 
@@ -23,7 +23,7 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="registrationInputEmail" class="form-label">Почта</label>
+                                    <label for="registrationInputEmail" class="form-label required">Почта</label>
                                     <input type="text" class="form-control @error('email') is-invalid @enderror"
                                            id="registrationInputEmail" name="email" placeholder="Email" value="{{ old('email') }}">
 
@@ -33,7 +33,7 @@
 
                                 </div>
                                 <div class="mb-3">
-                                    <label for="registrationInputPassword" class="form-label">Пароль</label>
+                                    <label for="registrationInputPassword" class="form-label required">Пароль</label>
                                     <input type="password" class="form-control @error('password') is-invalid @enderror"
                                            id="registrationInputPassword" name="password" placeholder="Пароль">
 

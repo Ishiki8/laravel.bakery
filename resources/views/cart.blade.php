@@ -21,7 +21,6 @@
 
             <div class="col-lg-8 mb-3">
                 <div class="p-3 h-100 bg-white">
-{{--                    cart-content--}}
                     <div class="table-responsive">
                         <table class="table align-middle table-hover">
                             <thead class="table-dark">
@@ -83,10 +82,10 @@
                         <h3>Итого</h3>
                         <h3>{{ number_format($order->getTotalPrice(), 2) }} руб.</h3>
                     </div>
-
                     <div class="d-grid">
                         <a href="{{ route('cart-confirm') }}" class="btn btn-primary">Перейти к оформлению заказа</a>
-                    </div></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -14,7 +14,7 @@
             @method('PUT')
         @endisset
         <div class="mb-3 col-xl-5 col-lg-7 col-md-9">
-            <label for="categoryInputCode" class="form-label">Код</label>
+            <label for="categoryInputCode" class="form-label required">Код</label>
             <input type="text" class="form-control @error('code') is-invalid @enderror"
                    id="categoryInputCode" name="code" placeholder="Код категории" value="{{ old('code') ?? $category->code ?? '' }}">
 
@@ -23,7 +23,7 @@
             @enderror
         </div>
         <div class="mb-3 col-xl-5 col-lg-7 col-md-9">
-            <label for="categoryInputTitle" class="form-label">Название</label>
+            <label for="categoryInputTitle" class="form-label required">Название</label>
             <input type="text" class="form-control @error('title') is-invalid @enderror"
                    id="categoryInputTitle" name="title" placeholder="Название категории" value="{{ old('title') ?? $category->title ?? '' }}">
 
