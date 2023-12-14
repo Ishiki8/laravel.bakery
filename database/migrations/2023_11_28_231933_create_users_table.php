@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamp('date_reg')->useCurrent();
             $table->string('username', 50);
-            $table->string('email', 50)->unique();
+            $table->string('email', 254)->unique();
             $table->string('password', 255);
             $table->string('address', 200)->nullable();
             $table->string('phone_number', 11)->nullable();
