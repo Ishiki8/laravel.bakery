@@ -63,6 +63,10 @@ class CartController extends Controller
     }
 
     public function cartAdd($productId) {
+        if (!Auth::check()) {
+            return redirect(route('user.registration'));
+        }
+
         $orderId = session('orderId');
         $order = Order::find($orderId);
 

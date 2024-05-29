@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-6 col-md-4">
-                    <a href="{{ route('index') }}" class="header-logo h1">ХЛЕБУШЕК</a>
+                    <a href="{{ route('index') }}" class="header-logo h1">Bread</a>
                 </div>
 
                 <div class="col-12 col-md-4 order-md-1 order-2 d-md-block d-flex justify-content-center mt-1 mt-md-0 mb-md-0 mb-1 p-0">
@@ -91,17 +91,18 @@
                 </div>
             </div>
 
-
-            <div id="navbar-cart">
-                <a href="{{ asset('cart') }}">
-                    <button class="btn position-relative" type="button">
-                        <i class="fa-solid fa-cart-shopping cart-shopping-navbar"></i>
-                        @if($productsInCart)
-                            <span class="position-absolute top-0 start-50 badge rounded-pill bg-danger">{{ $productsInCart }}</span>
-                        @endif
-                    </button>
-                </a>
-            </div>
+            @auth
+                <div id="navbar-cart">
+                    <a href="{{ asset('cart') }}">
+                        <button class="btn position-relative" type="button">
+                            <i class="fa-solid fa-cart-shopping cart-shopping-navbar"></i>
+                            @if($productsInCart)
+                                <span class="position-absolute top-0 start-50 badge rounded-pill bg-danger">{{ $productsInCart }}</span>
+                            @endif
+                        </button>
+                    </a>
+                </div>
+            @endauth
         </div>
     </nav>
 </div>
