@@ -14,11 +14,7 @@
         </div>
     </div>
     <div class="container-fluid">
-        @if(\App\Models\Product::countProductsInCart() === 0)
-            <span class="fs-3">В корзине пока что пусто...</span>
-        @else
         <div class="row">
-
             <div class="col-lg-8 mb-3">
                 <div class="p-3 h-100 bg-white">
                     <div class="table-responsive">
@@ -30,46 +26,11 @@
                                     <th>Цена</th>
                                     <th>Количество</th>
                                     <th>Общая стоимость</th>
+                                    <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach($order->products as $product)
-                                    <tr>
-                                        <td class="product-img-td">
-                                            <a href="{{ route('product', $product->code) }}">
-                                                <img src="{{ $product->image }}" alt="">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="{{ route('product', $product->code) }}" class="cart-content-title">
-                                                {{ $product->title }}
-                                            </a>
-                                        </td>
-                                        <td>
-                                            {{ $product->price }} руб.
-                                        </td>
-                                        <td>
-                                            <form action="{{ route('cart-remove', $product) }}" method="POST" class="d-inline">
-                                                <button type="submit" class="btn btn-sm btn-danger mb-1">
-                                                    <span>-</span>
-                                                </button>
-                                                @csrf
-                                            </form>
+                            <tbody class="cart-list">
 
-                                                <span class="ms-md-2 me-md-2">{{ $product->pivot->quantity }}</span>
-
-                                            <form action="{{ route('cart-add', $product) }}" method="POST" class="d-inline">
-                                                <button type="submit" class="btn btn-sm btn-primary mb-1">
-                                                    <span>+</span>
-                                                </button>
-                                                @csrf
-                                            </form>
-                                        </td>
-                                        <td>
-                                            {{ number_format($product->getTotalPrice(), 2) }} руб.
-                                        </td>
-                                    </tr>
-                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -80,7 +41,7 @@
                 <div class="cart-summary p-3 sidebar sticky-top-2">
                     <div class="d-flex justify-content-between my-3">
                         <h3>Итого</h3>
-                        <h3>{{ number_format($order->getTotalPrice(), 2) }} руб.</h3>
+                        <h3 class="total-price"></h3>
                     </div>
                     <div class="d-grid">
                         <a href="{{ route('cart-confirm') }}" class="btn btn-primary">Перейти к оформлению заказа</a>
@@ -89,6 +50,122 @@
             </div>
         </div>
     </div>
-    @endif
 </main>
 @endsection
+
+@pushonce('scripts')
+    <script>
+        $(document).ready(function() {
+            let cart = JSON.parse(localStorage.getItem('cart'));
+            let output = ``;
+
+            if (cart != null) {
+                cart.forEach(item => {
+                    output += `
+                    <tr class="cart-list-item">
+                        <input type="hidden" name="product_id" value="${item.product_id}"/>
+                        <td class="product-img-td">
+                            <a href="/product/${item.product_code}">
+                                <img src="${item.product_img}" alt="">
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/product/${item.product_code}" class="cart-content-title">
+                                ${item.product_title}
+                            </a>
+                        </td>
+                        <td>
+                            ${item.product_price} руб.
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-sm btn-danger mb-1 sub-product-btn">
+                                <span>-</span>
+                            </button>
+
+                            <span class="ms-md-2 me-md-2 product-count">${item.count}</span>
+
+                            <button type="submit" class="btn btn-sm btn-primary mb-1 add-product-btn">
+                                <span>+</span>
+                            </button>
+                        </td>
+                        <td class="product-total-price">
+                            ${(item.product_price * item.count).toFixed(2)} руб.
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-sm btn-dark mb-1 delete-product-btn">
+                                <span>X</span>
+                            </button>
+                        </td>
+                    </tr>
+                `
+                })
+
+                $('.cart-list').html(output);
+
+                $(document).on('click', '.delete-product-btn', function() {
+                    let id = $(this).parents('.cart-list-item').find('input[name="product_id"]').val();
+                    let cart = JSON.parse(localStorage.getItem('cart'));
+
+                    cart = cart.filter(item => {
+                        if (item.product_id !== id) {
+                            return item;
+                        }
+                    })
+
+                    $(this).parents('.cart-list-item').remove();
+
+                    $('.products-count').text(cart.reduce((sum, item) => sum + item.count, 0));
+                    localStorage.setItem('cart', JSON.stringify(cart))
+                })
+
+                $(document).on('click', '.add-product-btn', function() {
+                    let id = $(this).parents('.cart-list-item').find('input[name="product_id"]').val();
+                    let count = Number($(this).siblings('.product-count').text());
+                    let cart = JSON.parse(localStorage.getItem('cart'));
+
+                    $(this).siblings('.product-count').text(count + 1);
+
+                    cart.map(item => {
+                        if (item.product_id === id) {
+                            return item.count += 1;
+                        }
+                    })
+
+                    $('.products-count').text(cart.reduce((sum, item) => sum + item.count, 0));
+
+                    let totalPrice = cart.
+                    $('.product-total-price').text();
+
+                    localStorage.setItem('cart', JSON.stringify(cart))
+                })
+
+                $(document).on('click', '.sub-product-btn', function() {
+                    let id = $(this).parents('.cart-list-item').find('input[name="product_id"]').val();
+                    let count = Number($(this).siblings('.product-count').text());
+                    let cart = JSON.parse(localStorage.getItem('cart'));
+
+                    if (count > 1) {
+                        $(this).siblings('.product-count').text(count - 1);
+
+                        cart.map(item => {
+                            if (item.product_id === id) {
+                                return item.count -= 1;
+                            }
+                        })
+
+                        $('.products-count').text(cart.reduce((sum, item) => sum + item.count, 0));
+
+
+                        localStorage.setItem('cart', JSON.stringify(cart))
+                    }
+                })
+
+                function getTotalPrice(cart) {
+                    return cart.reduce((sum, item) => sum + item.count * item.product_price, 0);
+                }
+
+                $('.total-price').text(getTotalPrice(cart).toFixed(2) + ' руб.');
+            }
+        })
+    </script>
+@endpushonce

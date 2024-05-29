@@ -96,9 +96,9 @@
                     <a href="{{ asset('cart') }}">
                         <button class="btn position-relative" type="button">
                             <i class="fa-solid fa-cart-shopping cart-shopping-navbar"></i>
-                            @if($productsInCart)
-                                <span class="position-absolute top-0 start-50 badge rounded-pill bg-danger">{{ $productsInCart }}</span>
-                            @endif
+{{--                            @if($productsInCart)--}}
+                                <span class="position-absolute top-0 start-50 badge rounded-pill bg-danger products-count">0</span>
+{{--                            @endif--}}
                         </button>
                     </a>
                 </div>
@@ -115,4 +115,16 @@
  @if(session()->has('success'))
      <p class="alert alert-success text-center m-1">{{ session()->get('success') }}</p>
  @endif
+
+ @pushonce('scripts')
+     <script>
+         $(document).ready(function() {
+             let cart = JSON.parse(localStorage.getItem('cart'));
+
+             if (cart != null) {
+                 $('.products-count').text(cart.reduce((sum, item) => sum + item.count, 0));
+             }
+         })
+     </script>
+ @endpushonce
 

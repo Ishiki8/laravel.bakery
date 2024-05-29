@@ -402,6 +402,10 @@ section {
     width: 70px;
 }
 
+.cart-summary {
+    z-index: 1 !important;
+}
+
 .cart-summary h3 {
     color: #000;
 }
@@ -409,6 +413,7 @@ section {
 .cart-summary .btn {
     padding: 1rem;
 }
+
 
 /* ============================= Cart ================================ */
 
