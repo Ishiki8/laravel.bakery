@@ -8,9 +8,11 @@ use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use function PHPUnit\Framework\isEmpty;
 
 class CartController extends Controller
 {
+    public array $order = [];
     public function cart() {
         $orderId = session('orderId');
         $order = Order::find($orderId);
@@ -22,28 +24,36 @@ class CartController extends Controller
         ]);
     }
 
+    public function getLsCart() {
+        $this->order = json_decode($_POST['order']);
+        return $this->order;
+    }
+
     public function cartConfirm() {
+
         if (Auth::check()) {
-            if (Product::countProductsInCart() === 0) {
-                return redirect(route('cart'));
-            }
+                print_r($this->order);
+//            if (count($this->order) === 0) {
+//                return redirect(route('index'));
+//            }
 
-            $orderId = session('orderId');
-
-            if (is_null($orderId)) {
-                return redirect(route('index'));
-            }
+//            $orderId = session('orderId');
+//
+//            if (is_null($orderId)) {
+//                return redirect(route('index'));
+//            }
 
             $user = auth()->user();
-            $order = Order::find($orderId);
+//            $order = Order::find($orderId);
             $categories = Category::get();
 
             return view('cart_confirm')->with([
                 'categories' => $categories,
-                'order' => $order,
+//                'order' => $order,
                 'address' => $user->address,
                 'phone' => $user->phone_number
             ]);
+
         }
 
         return redirect(route('user.login'));

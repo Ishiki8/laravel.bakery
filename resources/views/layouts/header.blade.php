@@ -91,18 +91,14 @@
                 </div>
             </div>
 
-            @auth
-                <div id="navbar-cart">
-                    <a href="{{ asset('cart') }}">
-                        <button class="btn position-relative" type="button">
-                            <i class="fa-solid fa-cart-shopping cart-shopping-navbar"></i>
-{{--                            @if($productsInCart)--}}
-                                <span class="position-absolute top-0 start-50 badge rounded-pill bg-danger products-count">0</span>
-{{--                            @endif--}}
-                        </button>
-                    </a>
-                </div>
-            @endauth
+            <div id="navbar-cart">
+                <a href="{{ asset('cart') }}">
+                    <button class="btn position-relative" type="button">
+                        <i class="fa-solid fa-cart-shopping cart-shopping-navbar"></i>
+                        <span class="position-absolute top-0 start-50 badge rounded-pill bg-danger products-count"></span>
+                    </button>
+                </a>
+            </div>
         </div>
     </nav>
 </div>
@@ -122,7 +118,9 @@
              let cart = JSON.parse(localStorage.getItem('cart'));
 
              if (cart != null) {
-                 $('.products-count').text(cart.reduce((sum, item) => sum + item.count, 0));
+                 if (cart.length > 0) {
+                     $('.products-count').text(cart.reduce((sum, item) => sum + item.count, 0));
+                 }
              }
          })
      </script>

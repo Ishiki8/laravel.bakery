@@ -88,8 +88,8 @@
                                 <span>+</span>
                             </button>
                         </td>
-                        <td class="product-total-price">
-                            ${(item.product_price * item.count).toFixed(2)} руб.
+                        <td>
+                            <span class="product-total-price">${(item.product_price * item.count).toFixed(2)}</span> руб.
                         </td>
                         <td>
                             <button type="submit" class="btn btn-sm btn-dark mb-1 delete-product-btn">
@@ -101,6 +101,15 @@
                 })
 
                 $('.cart-list').html(output);
+
+                function getTotalPrice(cart) {
+                    return cart.reduce((sum, item) => sum + item.count * item.product_price, 0);
+                }
+
+                function getCurrentProductTotalPrice(cart, productId) {
+                    let currentProduct = Object.keys(cart).find(k => cart[k].product_id === productId);
+                    return (cart[currentProduct].product_price * cart[currentProduct].count).toFixed(2)
+                }
 
                 $(document).on('click', '.delete-product-btn', function() {
                     let id = $(this).parents('.cart-list-item').find('input[name="product_id"]').val();
@@ -114,8 +123,15 @@
 
                     $(this).parents('.cart-list-item').remove();
 
-                    $('.products-count').text(cart.reduce((sum, item) => sum + item.count, 0));
-                    localStorage.setItem('cart', JSON.stringify(cart))
+                    if (cart.length > 0) {
+                        $('.products-count').text(cart.reduce((sum, item) => sum + item.count, 0));
+                    } else {
+                        $('.products-count').text('');
+                    }
+
+                    $('.total-price').text(getTotalPrice(cart).toFixed(2) + ' руб.');
+
+                    localStorage.setItem('cart', JSON.stringify(cart));
                 })
 
                 $(document).on('click', '.add-product-btn', function() {
@@ -132,9 +148,8 @@
                     })
 
                     $('.products-count').text(cart.reduce((sum, item) => sum + item.count, 0));
-
-                    let totalPrice = cart.
-                    $('.product-total-price').text();
+                    $(this).parents('.cart-list-item').find('.product-total-price').text(getCurrentProductTotalPrice(cart, id));
+                    $('.total-price').text(getTotalPrice(cart).toFixed(2) + ' руб.');
 
                     localStorage.setItem('cart', JSON.stringify(cart))
                 })
@@ -154,15 +169,12 @@
                         })
 
                         $('.products-count').text(cart.reduce((sum, item) => sum + item.count, 0));
-
+                        $(this).parents('.cart-list-item').find('.product-total-price').text(getCurrentProductTotalPrice(cart, id));
+                        $('.total-price').text(getTotalPrice(cart).toFixed(2) + ' руб.');
 
                         localStorage.setItem('cart', JSON.stringify(cart))
                     }
                 })
-
-                function getTotalPrice(cart) {
-                    return cart.reduce((sum, item) => sum + item.count * item.product_price, 0);
-                }
 
                 $('.total-price').text(getTotalPrice(cart).toFixed(2) + ' руб.');
             }

@@ -16,18 +16,7 @@
                     <span class="price">{{ $product_price }}</span> руб.
                 </div>
 
-{{--                <form action="{{ route('cart-add', $product ) }}" method="POST">--}}
-{{--                    <div class="product-links">--}}
-{{--                        <button type="submit" class="btn btn-outline-secondary add-to-cart">--}}
-{{--                            <i class="fas fa-shopping-cart"></i>--}}
-{{--                        </button>--}}
-{{--                    </div>--}}
-
-{{--                    @csrf--}}
-{{--                </form>--}}
-
                 <div class="product-links">
-
                     <button type="submit" class="btn btn-outline-secondary add-to-cart">
                         <i class="fas fa-shopping-cart"></i>
                     </button>

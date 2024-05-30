@@ -20,10 +20,11 @@ Route::get('/category/{code}', [Controllers\MainController::class, 'category'])-
 Route::get('/search', [Controllers\MainController::class, 'search'])->name('search');
 Route::get('/product/{code}', [Controllers\MainController::class, 'product'])->name('product');
 
-Route::controller(Controllers\CartController::class)->prefix('cart')->middleware('auth')->group(function() {
+Route::controller(Controllers\CartController::class)->prefix('cart')->group(function() {
     Route::get('/',  'cart')->name('cart');
     Route::post('/add/{id}', 'cartAdd')->name('cart-add');
     Route::post('/remove/{id}', 'cartRemove')->name('cart-remove');
+    Route::post('/getCart', 'getLsCart')->name('ls-cart');
     Route::get('/confirm', 'cartConfirm')->name('cart-confirm');
     Route::post('/confirm', 'cartConfirmAdd')->name('cart-confirm-add');
 });
