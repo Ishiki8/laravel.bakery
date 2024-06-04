@@ -24,7 +24,7 @@ Route::controller(Controllers\CartController::class)->prefix('cart')->group(func
     Route::get('/',  'cart')->name('cart');
     Route::post('/add/{id}', 'cartAdd')->name('cart-add');
     Route::post('/remove/{id}', 'cartRemove')->name('cart-remove');
-    Route::post('/getCart', 'getLsCart')->name('ls-cart');
+//    Route::post('/getCart', 'getLsCart')->name('ls-cart');
     Route::get('/confirm', 'cartConfirm')->name('cart-confirm');
     Route::post('/confirm', 'cartConfirmAdd')->name('cart-confirm-add');
 });

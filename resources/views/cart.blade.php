@@ -102,13 +102,9 @@
 
                 $('.cart-list').html(output);
 
-                function getTotalPrice(cart) {
-                    return cart.reduce((sum, item) => sum + item.count * item.product_price, 0);
-                }
-
                 function getCurrentProductTotalPrice(cart, productId) {
                     let currentProduct = Object.keys(cart).find(k => cart[k].product_id === productId);
-                    return (cart[currentProduct].product_price * cart[currentProduct].count).toFixed(2)
+                    return (cart[currentProduct].product_price * cart[currentProduct].count).toFixed(2);
                 }
 
                 $(document).on('click', '.delete-product-btn', function() {
@@ -132,6 +128,10 @@
                     $('.total-price').text(getTotalPrice(cart).toFixed(2) + ' руб.');
 
                     localStorage.setItem('cart', JSON.stringify(cart));
+
+                    setCookie('cart', JSON.stringify(delUnnecessaryKeys(cart,
+                        ['product_title', 'product_code', 'product_price', 'product_img']
+                    )));
                 })
 
                 $(document).on('click', '.add-product-btn', function() {
@@ -151,7 +151,11 @@
                     $(this).parents('.cart-list-item').find('.product-total-price').text(getCurrentProductTotalPrice(cart, id));
                     $('.total-price').text(getTotalPrice(cart).toFixed(2) + ' руб.');
 
-                    localStorage.setItem('cart', JSON.stringify(cart))
+                    localStorage.setItem('cart', JSON.stringify(cart));
+
+                    setCookie('cart', JSON.stringify(delUnnecessaryKeys(cart,
+                        ['product_title', 'product_code', 'product_price', 'product_img']
+                    )));
                 })
 
                 $(document).on('click', '.sub-product-btn', function() {
@@ -172,7 +176,11 @@
                         $(this).parents('.cart-list-item').find('.product-total-price').text(getCurrentProductTotalPrice(cart, id));
                         $('.total-price').text(getTotalPrice(cart).toFixed(2) + ' руб.');
 
-                        localStorage.setItem('cart', JSON.stringify(cart))
+                        localStorage.setItem('cart', JSON.stringify(cart));
+
+                        setCookie('cart', JSON.stringify(delUnnecessaryKeys(cart,
+                            ['product_title', 'product_code', 'product_price', 'product_img']
+                        )));
                     }
                 })
 

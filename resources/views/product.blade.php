@@ -84,6 +84,10 @@
 
                 $('.products-count').text(result.reduce((sum, item) => sum + item.count, 0));
                 localStorage.setItem('cart', JSON.stringify(result));
+
+                setCookie('cart', JSON.stringify(delUnnecessaryKeys(cart,
+                    ['product_title', 'product_code', 'product_price', 'product_img']
+                )));
             })
         })
     </script>

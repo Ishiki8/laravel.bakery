@@ -32,7 +32,7 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3 cart-summary">
-{{--                                    <h3>Итого: {{ number_format($order->getTotalPrice(), 2) }} руб.</h3>--}}
+                                    <h3>Итого: <span class="total-price"></span> руб.</h3>
                                 </div>
                                 @csrf
                                 <button type="submit" class="btn btn-primary">Оформить заказ</button>
@@ -46,17 +46,12 @@
     </main>
 @endsection
 
-{{--@pushonce('scripts')--}}
-{{--    <script>--}}
-{{--        $(document).ready(function() {--}}
-{{--            let cart = JSON.parse(localStorage.getItem('cart'));--}}
-{{--            cart.forEach(item => delete(item['product_title']));--}}
-{{--            cart.forEach(item => delete(item['product_code']));--}}
-{{--            cart.forEach(item => delete(item['product_img']));--}}
-{{--            cart = JSON.stringify(cart);--}}
-
-{{--            jQuery.post("/cart/getCart", {'_token': $('meta[name="csrf-token"]').attr('content'), cart: cart});--}}
-{{--        })--}}
-{{--    </script>--}}
-{{--@endpushonce--}}
+@pushonce('scripts')
+    <script>
+        $(document).ready(function() {
+            let cart = JSON.parse(localStorage.getItem('cart'));
+            $('.total-price').text(getTotalPrice(cart).toFixed(2));
+        })
+    </script>
+@endpushonce
 

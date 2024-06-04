@@ -24,15 +24,36 @@ class CartController extends Controller
         ]);
     }
 
-    public function getLsCart() {
-        $this->order = json_decode($_POST['order']);
-        return $this->order;
-    }
+//    public function getLsCart() {
+//        $this->order = json_decode($_POST['order']);
+//
+//        $heap = json_decode($_REQUEST['order']);
+//        setcookie('cart', serialize($heap));
+//
+//
+////        print_r($this->order);
+//        return $this->order;
+//    }
 
     public function cartConfirm() {
 
         if (Auth::check()) {
-                print_r($this->order);
+//            (isset($_COOKIE['cart']) ? $heap = unserialize($_COOKIE['cart']) : $heap = array());
+
+//            foreach (unserialize($_COOKIE['cart']) as $item => $key) {
+//                echo($item);
+//            }
+//            $array = $_COOKIE['cart'];
+//            print_r(unserialize(serialize(json_decode($_COOKIE['cart']))));
+            isset($_COOKIE['cart']) ? $array = json_decode($_COOKIE['cart'], true) : $array = [];
+
+
+            print_r($array);
+
+            if (empty($array)) {
+                return redirect(route('index'));
+            }
+
 //            if (count($this->order) === 0) {
 //                return redirect(route('index'));
 //            }

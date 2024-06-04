@@ -19,13 +19,13 @@
 @stack('scripts')
 
 <script>
-    let order = JSON.parse(localStorage.getItem('cart'));
-    order.forEach(item => delete(item['product_title']));
-    order.forEach(item => delete(item['product_code']));
-    order.forEach(item => delete(item['product_img']));
-    order = JSON.stringify(order);
+    if (getCookie('cart') === undefined) {
+        let cart = JSON.parse(localStorage.getItem('cart'));
 
-    jQuery.post("/cart/getCart", {'_token': $('meta[name="csrf-token"]').attr('content'), order: order});
+        setCookie('cart', JSON.stringify(delUnnecessaryKeys(cart,
+            ['product_title', 'product_code', 'product_price', 'product_img']
+        )));
+    }
 </script>
 </body>
 </html>
