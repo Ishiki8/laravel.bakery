@@ -9,7 +9,7 @@
             </div>
             <div class="col-sm-4 order-3 order-md-2">
                 <div class=" text-center d-md-flex align-items-center h-100 justify-content-center">
-                    © 2023 Copyright:
+                    © 2024 Copyright:
                     <a class="ms-1 text-body" href="{{ asset('index.php') }}">laravel.bakery</a>
                 </div>
             </div>

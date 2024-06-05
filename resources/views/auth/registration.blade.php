@@ -43,7 +43,10 @@
 
                                 </div>
                                 @csrf
-                                <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                                </div>
                             </form>
                         </div>
                     </div>

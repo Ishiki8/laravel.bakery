@@ -12,7 +12,7 @@
                     </h2>
                     <div class="row">
                         <div class="col-md-6 offset-md-3">
-{{--                            <form action="{{ route('cart-confirm-add') }}" method="POST" class="needs-validation" novalidate>--}}
+                            <form action="{{ route('cart-confirm-add') }}" method="POST" class="needs-validation" novalidate>
                                 <div class="mb-3">
                                     <label for="cartInputAddress" class="form-label required">Адрес доставки</label>
                                     <input type="text" class="form-control mt-1 @error('address') is-invalid @enderror"
@@ -35,8 +35,8 @@
                                     <h3>Итого: <span class="total-price"></span> руб.</h3>
                                 </div>
                                 @csrf
-                                <button type="submit" class="btn btn-primary">Оформить заказ</button>
-{{--                            </form>--}}
+                                <button type="submit" class="btn btn-primary" onclick="localStorage.clear()">Оформить заказ</button>
+                            </form>
                         </div>
                     </div>
 

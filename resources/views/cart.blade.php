@@ -13,7 +13,7 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid cart-inner">
         <div class="row">
             <div class="col-lg-8 mb-3">
                 <div class="p-3 h-100 bg-white">
@@ -59,7 +59,7 @@
             let cart = JSON.parse(localStorage.getItem('cart'));
             let output = ``;
 
-            if (cart != null) {
+            if (cart !== null && cart.length > 0) {
                 cart.forEach(item => {
                     output += `
                     <tr class="cart-list-item">
@@ -123,6 +123,7 @@
                         $('.products-count').text(cart.reduce((sum, item) => sum + item.count, 0));
                     } else {
                         $('.products-count').text('');
+                        $('.cart-inner').html(`<h3>В вашей корзине пока что пусто...</h3>`);
                     }
 
                     $('.total-price').text(getTotalPrice(cart).toFixed(2) + ' руб.');
@@ -185,6 +186,15 @@
                 })
 
                 $('.total-price').text(getTotalPrice(cart).toFixed(2) + ' руб.');
+            } else {
+                $('.cart-inner').html(`
+                <div class="text-center">
+                    <h3>Ваша корзина пуста</h3>
+                    <a type="submit" class="btn btn-lg btn-primary mb-4 mt-4" href="{{ route('index') }}">
+                                <span>За покупками</span>
+                    </a>
+                </div>
+                `);
             }
         })
     </script>

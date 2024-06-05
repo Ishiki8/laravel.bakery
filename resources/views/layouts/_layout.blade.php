@@ -22,9 +22,11 @@
     if (getCookie('cart') === undefined) {
         let cart = JSON.parse(localStorage.getItem('cart'));
 
-        setCookie('cart', JSON.stringify(delUnnecessaryKeys(cart,
-            ['product_title', 'product_code', 'product_price', 'product_img']
-        )));
+        if (cart !== null) {
+            setCookie('cart', JSON.stringify(delUnnecessaryKeys(cart,
+                ['product_title', 'product_code', 'product_price', 'product_img']
+            )));
+        }
     }
 </script>
 </body>

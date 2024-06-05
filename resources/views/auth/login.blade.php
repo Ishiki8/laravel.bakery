@@ -27,7 +27,10 @@
                                     @enderror
                                 </div>
                                 @csrf
-                                <button type="submit" class="btn btn-primary">Войти</button>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">Войти</button>
+                                </div>
+
                             </form>
                         </div>
                     </div>

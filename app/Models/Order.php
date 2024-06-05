@@ -36,9 +36,9 @@ class Order extends Model
     }
 
     public function saveOrder($address, $phone) {
-        if ($this->status !== 0) {
-            return false;
-        }
+//        if ($this->status !== 0) {
+//            return false;
+//        }
 
         if (Str::startsWith($phone, '+7')) {
             $phone = substr($phone, 1);
@@ -53,7 +53,7 @@ class Order extends Model
         $this->user_id = auth()->id();
         $this->save();
 
-        session()->forget('orderId');
+//        session()->forget('orderId');
 
         return true;
     }

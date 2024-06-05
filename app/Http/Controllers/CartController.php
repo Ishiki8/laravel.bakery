@@ -45,12 +45,9 @@ class CartController extends Controller
 //            }
 //            $array = $_COOKIE['cart'];
 //            print_r(unserialize(serialize(json_decode($_COOKIE['cart']))));
-            isset($_COOKIE['cart']) ? $array = json_decode($_COOKIE['cart'], true) : $array = [];
+            isset($_COOKIE['cart']) ? $cart = json_decode($_COOKIE['cart'], true) : $cart = [];
 
-
-            print_r($array);
-
-            if (empty($array)) {
+            if (empty($cart)) {
                 return redirect(route('index'));
             }
 
@@ -81,13 +78,29 @@ class CartController extends Controller
     }
 
     public function cartConfirmAdd(CartRequest $request) {
-        $orderId = session('orderId');
+//        $orderId = session('orderId');
+//
+//        if (is_null($orderId)) {
+//            return redirect(route('index'));
+//        }
 
-        if (is_null($orderId)) {
+        isset($_COOKIE['cart']) ? $cart = json_decode($_COOKIE['cart'], true) : $cart = [];
+
+        if (empty($cart)) {
             return redirect(route('index'));
         }
 
-        $order = Order::find($orderId);
+//        $order = Order::find($orderId);
+        $order = Order::create();
+
+        foreach ($cart as $product) {
+            $order->products()->attach($product['product_id']);
+            $pivotRow = $order->products()->where('product_id', $product['product_id'])->first()->pivot;
+            $pivotRow->quantity = $product['count'];
+            $pivotRow->update();
+        }
+
+        setcookie('cart','',time()-3600,'/');
         $order->saveOrder($request->get('address'), $request->get('phone'));
 
         return redirect(route('user.userOrders'));

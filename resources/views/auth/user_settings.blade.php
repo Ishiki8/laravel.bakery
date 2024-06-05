@@ -15,15 +15,22 @@
         </div>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12 col-md-6 col-sm-8">
+                <div class="col-12 col-md-6 col-sm-8 mx-auto">
                     <div class="mb-3">
-                        <span class="fw-bold">Имя:</span>
-                        <span>{{ $user->username }}</span>
-                        <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapse-username" aria-expanded="@error('username') true @else false @enderror"
-                                aria-controls="collapse-username">
-                            Изменить
-                        </button>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <span class="fw-bold">Имя:</span>
+                                <span>{{ $user->username }}</span>
+                            </div>
+
+                            <div>
+                                <button class="btn btn-sm btn-primary justify-content-end" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse-username" aria-expanded="@error('username') true @else false @enderror"
+                                        aria-controls="collapse-username">
+                                    Изменить
+                                </button>
+                            </div>
+                        </div>
 
                         <div class="collapse @error('username') show @enderror" id="collapse-username">
                             <form action="{{ route('user.userChangeName') }}" method="POST">
@@ -42,13 +49,20 @@
                     </div>
 
                     <div class="mb-3">
-                        <span class="fw-bold">Почта:</span>
-                        <span>{{ $user->email }}</span>
-                        <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapse-email" aria-expanded="@error('email') true @else false @enderror"
-                                aria-controls="collapse-email">
-                            Изменить
-                        </button>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <span class="fw-bold">Почта:</span>
+                                <span>{{ $user->email }}</span>
+                            </div>
+
+                            <div>
+                                <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse-email" aria-expanded="@error('email') true @else false @enderror"
+                                        aria-controls="collapse-email">
+                                    Изменить
+                                </button>
+                            </div>
+                        </div>
 
                         <div class="collapse @error('email') show @enderror" id="collapse-email">
                             <form action="{{ route('user.userChangeEmail') }}" method="POST">
@@ -67,13 +81,20 @@
                     </div>
 
                     <div class="mb-3">
-                        <span class="fw-bold">Пароль:</span>
-                        <span>********</span>
-                        <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapse-password" aria-expanded="@error('password') true @else false @enderror"
-                                aria-controls="collapse-email">
-                            Изменить
-                        </button>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <span class="fw-bold">Пароль:</span>
+                                <span>********</span>
+                            </div>
+
+                            <div>
+                                <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse-password" aria-expanded="@error('password') true @else false @enderror"
+                                        aria-controls="collapse-email">
+                                    Изменить
+                                </button>
+                            </div>
+                        </div>
 
                         <div class="collapse @error('password') show @enderror" id="collapse-password">
                             <form action="{{ route('user.userChangePassword') }}" method="POST">
@@ -92,13 +113,20 @@
                     </div>
 
                     <div class="mb-3">
-                        <span class="fw-bold">Адрес доставки:</span>
-                        <span>{{ $user->address ?? 'Не указан' }}</span>
-                        <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapse-address" aria-expanded="@error('address') true @else false @enderror"
-                                aria-controls="collapse-address">
-                            Изменить
-                        </button>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <span class="fw-bold">Адрес доставки:</span>
+                                <span>{{ $user->address ?? 'Не указан' }}</span>
+                            </div>
+
+                            <div>
+                                <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse-address" aria-expanded="@error('address') true @else false @enderror"
+                                        aria-controls="collapse-address">
+                                    Изменить
+                                </button>
+                            </div>
+                        </div>
 
                         <div class="collapse @error('address') show @enderror" id="collapse-address">
                             <form action="{{ route('user.userChangeAddress') }}" method="POST">
@@ -117,13 +145,20 @@
                     </div>
 
                     <div class="mb-3">
-                        <span class="fw-bold">Номер телефона:</span>
-                        <span>{{ phoneToFormat($user->phone_number) ?? 'Не указан' }}</span>
-                        <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapse-phone_number" aria-expanded="@error('phone_number') true @else false @enderror"
-                                aria-controls="collapse-phone_number">
-                            Изменить
-                        </button>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <span class="fw-bold">Номер телефона:</span>
+                                <span>{{ phoneToFormat($user->phone_number) ?? 'Не указан' }}</span>
+                            </div>
+
+                            <div>
+                                <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse-phone_number" aria-expanded="@error('phone_number') true @else false @enderror"
+                                        aria-controls="collapse-phone_number">
+                                    Изменить
+                                </button>
+                            </div>
+                        </div>
 
                         <div class="collapse @error('phone_number') show @enderror" id="collapse-phone_number">
                             <form action="{{ route('user.userChangePhone') }}" method="POST">
