@@ -54,6 +54,7 @@ class Order extends Model
         $this->save();
 
 //        session()->forget('orderId');
+        session()->flash('success', 'Ваш заказ успешно оформлен и принят в работу.');
 
         return true;
     }

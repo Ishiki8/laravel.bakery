@@ -1,4 +1,4 @@
-@extends('layouts._layout', ['categories' => $categories, 'active_category' => $category->code])
+@extends('layouts._layout', ['categories' => $categories, 'active_category' => $category->id])
 
 @section('title', $category->title)
 

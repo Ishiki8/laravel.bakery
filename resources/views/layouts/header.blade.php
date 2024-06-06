@@ -1,13 +1,9 @@
- @php
-     $productsInCart = \App\Models\Product::countProductsInCart()
- @endphp
-
 <header class="header">
     <div class="header-top py-1">
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-6 col-md-4">
-                    <a href="{{ route('index') }}" class="header-logo h1">Bread</a>
+                    <a href="{{ route('index') }}" class="header-logo h1"><img src="/img/bread_logo.svg" alt="Bread" class="bread-logo"/></a>
                 </div>
 
                 <div class="col-12 col-md-4 order-md-1 order-2 d-md-block d-flex justify-content-center mt-1 mt-md-0 mb-md-0 mb-1 p-0">
@@ -79,10 +75,10 @@
                     <ul class="navbar-nav m-auto">
                         @foreach($categories as $category)
                             <li class="nav-item">
-                                <a {!!(isset($active_category) && $active_category === $category->code) ?
+                                <a {!!(isset($active_category) && $active_category === $category->id) ?
                                         'class="nav-link active" aria-current="page"' :
                                         'class="nav-link"'!!}
-                                        href="{{ route('category', $category->code) }}">
+                                        href="{{ route('category', $category->id) }}">
                                     {{ $category->title }}
                                 </a>
                             </li>

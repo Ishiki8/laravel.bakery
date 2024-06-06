@@ -1,19 +1,18 @@
 <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
     <div class="product-card">
         <input type="hidden" name="product_id" value="{{ $product->id }}"/>
-        <input type="hidden" name="product_code" value="{{ $product_code }}"/>
         <div class="product-thumb">
-            <a href="{{ route('product', $product_code) }}"><img src="{{ $product_image }}" alt="{{ $product_code }}" class="product-img"></a>
+            <a href="{{ route('product', $product->id) }}"><img src="{{ $product->image }}" alt="{{ $product->title }}" class="product-img"></a>
         </div>
         <div class="product-details">
             <h4>
-                <a href="{{ route('product', $product_code) }}" class="product-title">{{ $product_title }}</a>
+                <a href="{{ route('product', $product->id) }}" class="product-title">{{ $product->title }}</a>
             </h4>
-            <p style="color: var(--accent-color)">{{ $product_category }}</p>
-            <p class="product-excerpt">{{ $product_description }}</p>
+            <p style="color: var(--accent-color)">{{ $product->category->title }}</p>
+            <p class="product-excerpt">{{ $product->description }}</p>
             <div class="product-bottom-details d-flex justify-content-between">
                 <div class="product-price">
-                    <span class="price">{{ $product_price }}</span> руб.
+                    <span class="price">{{ $product->price }}</span> руб.
                 </div>
 
                 <div class="product-links">
@@ -32,14 +31,12 @@
             $('.add-to-cart').on('click', function () {
                 let id = $(this).parents('.product-card').find('input[name="product_id"]').val();
                 let title = $(this).parents('.product-card').find('.product-title').text();
-                let code = $(this).parents('.product-card').find('input[name="product_code"]').val();
                 let price = $(this).parents('.product-card').find('.price').text();
                 let img = $(this).parents('.product-card').find('.product-img').attr('src');
 
                 let product = {
                     product_id: id,
                     product_title: title,
-                    product_code: code,
                     product_price: price,
                     product_img: img,
                     count: 1,
@@ -71,7 +68,7 @@
                 localStorage.setItem('cart', JSON.stringify(result));
 
                 setCookie('cart', JSON.stringify(delUnnecessaryKeys(result,
-                    ['product_title', 'product_code', 'product_price', 'product_img']
+                    ['product_title', 'product_price', 'product_img']
                 )));
             })
         })

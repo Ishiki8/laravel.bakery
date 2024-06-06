@@ -20,8 +20,8 @@ class MainController extends Controller
         ]);
     }
 
-    public function category($code) {
-        $category = Category::where('code', $code)->first();
+    public function category($id) {
+        $category = Category::where('id', $id)->first();
         $categories = Category::get();
         $products = $category->products()->paginate(4);
 
@@ -64,8 +64,8 @@ class MainController extends Controller
         ]);
     }
 
-    public function product($code) {
-        $product = Product::where('code', $code)->first();
+    public function product($id) {
+        $product = Product::where('id', $id)->first();
         $categories = Category::get();
 
         return view('product')->with([

@@ -74,7 +74,9 @@ class CartController extends Controller
 
         }
 
+        session()->flash('warning', 'Для оформления заказа необходимо авторизоваться!');
         return redirect(route('user.login'));
+
     }
 
     public function cartConfirmAdd(CartRequest $request) {

@@ -65,12 +65,12 @@
                     <tr class="cart-list-item">
                         <input type="hidden" name="product_id" value="${item.product_id}"/>
                         <td class="product-img-td">
-                            <a href="/product/${item.product_code}">
+                            <a href="/product/${item.product_id}">
                                 <img src="${item.product_img}" alt="">
                             </a>
                         </td>
                         <td>
-                            <a href="/product/${item.product_code}" class="cart-content-title">
+                            <a href="/product/${item.product_id}" class="cart-content-title">
                                 ${item.product_title}
                             </a>
                         </td>
@@ -131,7 +131,7 @@
                     localStorage.setItem('cart', JSON.stringify(cart));
 
                     setCookie('cart', JSON.stringify(delUnnecessaryKeys(cart,
-                        ['product_title', 'product_code', 'product_price', 'product_img']
+                        ['product_title', 'product_price', 'product_img']
                     )));
                 })
 
@@ -155,7 +155,7 @@
                     localStorage.setItem('cart', JSON.stringify(cart));
 
                     setCookie('cart', JSON.stringify(delUnnecessaryKeys(cart,
-                        ['product_title', 'product_code', 'product_price', 'product_img']
+                        ['product_title', 'product_price', 'product_img']
                     )));
                 })
 
@@ -180,7 +180,7 @@
                         localStorage.setItem('cart', JSON.stringify(cart));
 
                         setCookie('cart', JSON.stringify(delUnnecessaryKeys(cart,
-                            ['product_title', 'product_code', 'product_price', 'product_img']
+                            ['product_title', 'product_price', 'product_img']
                         )));
                     }
                 })
@@ -191,7 +191,7 @@
                 <div class="text-center">
                     <h3>Ваша корзина пуста</h3>
                     <a type="submit" class="btn btn-lg btn-primary mb-4 mt-4" href="{{ route('index') }}">
-                                <span>За покупками</span>
+                        <span>За покупками</span>
                     </a>
                 </div>
                 `);

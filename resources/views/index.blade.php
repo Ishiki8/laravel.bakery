@@ -73,12 +73,12 @@
                 <div class="row">
                     @foreach($products as $product)
                         @include('product_card', [
-                            'product_code' => $product->code,
-                            'product_image' => $product->image,
-                            'product_title' => $product->title,
-                            'product_description' => $product->description,
-                            'product_price' => $product->price,
-                            'product_category' => $product->category->title
+                            'product' => $product,
+//                            'product_image' => $product->image,
+//                            'product_title' => $product->title,
+//                            'product_description' => $product->description,
+//                            'product_price' => $product->price,
+//                            'product_category' => $product->category->title
                         ])
                     @endforeach
                 </div>

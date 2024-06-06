@@ -16,9 +16,9 @@ use App\Http\Controllers;
 */
 
 Route::get('/', [Controllers\MainController::class, 'index'])->name('index');
-Route::get('/category/{code}', [Controllers\MainController::class, 'category'])->name('category');
+Route::get('/category/{id}', [Controllers\MainController::class, 'category'])->name('category');
 Route::get('/search', [Controllers\MainController::class, 'search'])->name('search');
-Route::get('/product/{code}', [Controllers\MainController::class, 'product'])->name('product');
+Route::get('/product/{id}', [Controllers\MainController::class, 'product'])->name('product');
 
 Route::controller(Controllers\CartController::class)->prefix('cart')->group(function() {
     Route::get('/',  'cart')->name('cart');

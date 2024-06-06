@@ -6,12 +6,11 @@
     <main class="main">
         <div class="container-fluid">
             <input type="hidden" name="product_id" value="{{ $product->id }}"/>
-            <input type="hidden" name="product_code" value="{{ $product->code }}"/>
             <div class="row pt-3">
                 <div class="col-md-5 col-lg-4 mb-3">
                     <div class="bg-white">
                         <div class="product-thumb">
-                            <a href="{{ route('product', $product->code) }}"><img src="{{ asset($product->image) }}" alt="{{ $product->code }}" class="product-img"></a>
+                            <a href="{{ route('product', $product->id) }}"><img src="{{ asset($product->image) }}" alt="{{ $product->title }}" class="product-img"></a>
                         </div>
                     </div>
                 </div>
@@ -47,14 +46,12 @@
             $('.add-to-cart').on('click', function () {
                 let id = $(this).parents('.container-fluid').find('input[name="product_id"]').val();
                 let title = $(this).parents('.container-fluid').find('.product-title').text();
-                let code = $(this).parents('.container-fluid').find('input[name="product_code"]').val();
                 let price = $(this).parents('.container-fluid').find('.price').text();
                 let img = $(this).parents('.container-fluid').find('.product-img').attr('src');
 
                 let product = {
                     product_id: id,
                     product_title: title,
-                    product_code: code,
                     product_price: price,
                     product_img: img,
                     count: 1,
@@ -86,7 +83,7 @@
                 localStorage.setItem('cart', JSON.stringify(result));
 
                 setCookie('cart', JSON.stringify(delUnnecessaryKeys(cart,
-                    ['product_title', 'product_code', 'product_price', 'product_img']
+                    ['product_title', 'product_price', 'product_img']
                 )));
             })
         })

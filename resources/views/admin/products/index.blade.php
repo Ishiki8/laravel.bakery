@@ -7,7 +7,6 @@
             <thead class="table-dark">
             <tr>
                 <th>#</th>
-                <th>Код</th>
                 <th>Название</th>
                 <th>Изображение</th>
                 <th class="col-sm-2">Описание</th>
@@ -22,9 +21,6 @@
                 <tr>
                     <td>
                         {{ $product->id }}
-                    </td>
-                    <td>
-                        {{ $product->code }}
                     </td>
                     <td>
                         {{ $product->title }}

@@ -22,7 +22,6 @@ class ProductRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'code' => ['required', 'string', 'max:50', 'unique:products,code'],
             'title' => ['required', 'string', 'max:50', 'unique:products,title'],
             'image' => ['nullable', 'mimes:jpg,jpeg,png'],
             'description' => ['nullable', 'string', 'max:500'],
@@ -31,7 +30,6 @@ class ProductRequest extends FormRequest
         ];
 
         if ($this->route()->named('products.update')) {
-            $rules['code'] = ['required', 'string', 'max:50', 'unique:products,code,' . $this->product->id];
             $rules['title'] = ['required', 'string', 'max:50', 'unique:products,title,' . $this->product->id];
         }
 

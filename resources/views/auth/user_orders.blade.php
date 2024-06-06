@@ -52,12 +52,12 @@
                                         @foreach($order->products as $product)
                                             <tr>
                                                 <td class="product-img-td">
-                                                    <a href="{{ route('product', $product->code) }}">
+                                                    <a href="{{ route('product', $product->id) }}">
                                                         <img src="{{ $product->image }}" alt="">
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('product', $product->code) }}" class="cart-content-title">
+                                                    <a href="{{ route('product', $product->id) }}" class="cart-content-title">
                                                         {{ $product->title }}
                                                     </a>
                                                 </td>

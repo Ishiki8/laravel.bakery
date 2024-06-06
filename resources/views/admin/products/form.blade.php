@@ -15,15 +15,6 @@
         @endisset
 
         <div class="mb-3 col-xl-5 col-lg-7 col-md-9">
-            <label for="productInputCode" class="form-label required">Код</label>
-            <input type="text" class="form-control @error('code') is-invalid @enderror"
-                   id="productInputCode" name="code" placeholder="Код продукции" value="{{ old('code') ?? $product->code ?? '' }}">
-
-            @error('code')
-            <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
-        <div class="mb-3 col-xl-5 col-lg-7 col-md-9">
             <label for="productInputTitle" class="form-label required">Название</label>
             <input type="text" class="form-control @error('title') is-invalid @enderror"
                    id="productInputTitle" name="title" placeholder="Название продукции" value="{{ old('title') ?? $product->title ?? '' }}">
