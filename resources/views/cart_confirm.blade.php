@@ -35,7 +35,8 @@
                                     <h3>Итого: <span class="total-price"></span> руб.</h3>
                                 </div>
                                 @csrf
-                                <button type="submit" class="btn btn-primary" onclick="localStorage.clear()">Оформить заказ</button>
+                                <button type="submit" class="btn btn-primary" onclick="setCookie('cart', JSON.stringify(JSON.parse(localStorage.getItem('cart'))));
+                                    localStorage.clear();">Оформить заказ</button>
                             </form>
                         </div>
                     </div>
@@ -50,6 +51,13 @@
     <script>
         $(document).ready(function() {
             let cart = JSON.parse(localStorage.getItem('cart'));
+
+            if (cart === null) {
+                cart = JSON.parse(getCookie('cart'));
+                console.log(cart);
+                localStorage.setItem('cart', JSON.stringify(cart));
+            }
+
             $('.total-price').text(getTotalPrice(cart).toFixed(2));
         })
     </script>

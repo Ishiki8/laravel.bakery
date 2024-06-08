@@ -35,7 +35,7 @@
                                     <button type="button" class="btn btn-secondary-outline btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                         Аккаунт
                                     </button>
-                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark z-3">
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark z-4">
                                         <li class="dropdown-header" style="color: var(--accent-color)">{{ auth()->user()->username }}</li>
                                         <li><a class="dropdown-item" href="{{ route('user.userOrders') }}">Мои заказы</a></li>
                                         <li><a class="dropdown-item" href="{{ route('user.userSettings') }}">Настройки</a></li>
@@ -59,7 +59,7 @@
     {{-- <div class="header-top"></div> --}}
 </header>
 
-<div class="header-bottom sticky-top z-2">
+<div class="header-bottom sticky-top z-3">
     <nav class="navbar navbar-expand-sm bg-dark" data-bs-theme="dark">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

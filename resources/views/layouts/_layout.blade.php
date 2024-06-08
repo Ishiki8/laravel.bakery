@@ -24,7 +24,7 @@
 
         if (cart !== null) {
             setCookie('cart', JSON.stringify(delUnnecessaryKeys(cart,
-                ['product_title', 'product_code', 'product_price', 'product_img']
+                ['product_title', 'product_price', 'product_img']
             )));
         }
     }

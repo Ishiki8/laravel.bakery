@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class MainController extends Controller
 {
     public function index() {
-        $categories = Category::get();
+        $categories = Category::orderBy('id')->get();
 
         return view('index')->with([
             'categories' => $categories,
@@ -22,7 +22,7 @@ class MainController extends Controller
 
     public function category($id) {
         $category = Category::where('id', $id)->first();
-        $categories = Category::get();
+        $categories = Category::orderBy('id')->get();
         $products = $category->products()->paginate(4);
 
         return view('category')->with([
@@ -39,7 +39,7 @@ class MainController extends Controller
 
     public function userOrdersView() {
         $orders = Order::where('user_id', '=', auth()->id())->get()->sortDesc();
-        $categories = Category::get();
+        $categories = Category::orderBy('id')->get();
 
         return view('auth.user_orders')->with([
             'orders' => $orders,
@@ -66,7 +66,7 @@ class MainController extends Controller
 
     public function product($id) {
         $product = Product::where('id', $id)->first();
-        $categories = Category::get();
+        $categories = Category::orderBy('id')->get();
 
         return view('product')->with([
             'product' => $product,
