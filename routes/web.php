@@ -16,17 +16,14 @@ use App\Http\Controllers;
 */
 
 Route::get('/', [Controllers\MainController::class, 'index'])->name('index');
-Route::get('/category/{id}', [Controllers\MainController::class, 'category'])->name('category');
-Route::get('/search', [Controllers\MainController::class, 'search'])->name('search');
-Route::get('/product/{id}', [Controllers\MainController::class, 'product'])->name('product');
+Route::get('/category/{id}', [Controllers\MainController::class, 'categoryView'])->name('category');
+Route::get('/search', [Controllers\MainController::class, 'searchView'])->name('search');
+Route::get('/product/{id}', [Controllers\MainController::class, 'productView'])->name('product');
 
 Route::controller(Controllers\CartController::class)->prefix('cart')->group(function() {
-    Route::get('/',  'cart')->name('cart');
-    Route::post('/add/{id}', 'cartAdd')->name('cart-add');
-    Route::post('/remove/{id}', 'cartRemove')->name('cart-remove');
-//    Route::post('/getCart', 'getLsCart')->name('ls-cart');
-    Route::get('/confirm', 'cartConfirm')->name('cart-confirm');
-    Route::post('/confirm', 'cartConfirmAdd')->name('cart-confirm-add');
+    Route::get('/',  'cartView')->name('cart');
+    Route::get('/checkout', 'checkoutView')->name('checkout');
+    Route::post('/checkout', 'confirmOrder')->name('confirmOrder');
 });
 
 Route::name('user.')->group(function() {
@@ -39,7 +36,7 @@ Route::name('user.')->group(function() {
     })->name('logout');
 
     Route::get('/registration', [Controllers\Auth\RegistrationController::class, 'registrationView'])->name('registration');
-    Route::post('/registration', [Controllers\Auth\RegistrationController::class, 'register']);
+    Route::post('/registration', [Controllers\Auth\RegistrationController::class, 'registration']);
 
     Route::group(['middleware' => 'auth'], function () {
         Route::get('/settings', [Controllers\Auth\SettingsController::class, 'userSettingsView'])->name('userSettings');

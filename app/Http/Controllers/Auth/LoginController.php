@@ -16,7 +16,7 @@ class LoginController extends Controller
         }
 
         return view('auth.login')->with([
-            'categories' => Category::get()
+            'categories' => Category::orderBy('id')->get()
         ]);
     }
 

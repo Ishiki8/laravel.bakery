@@ -8,9 +8,6 @@ use Illuminate\Http\Request;
 
 class OrdersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $orders = Order::where('status', '!=', 0)->orderBy('id')->paginate(10);
@@ -20,9 +17,6 @@ class OrdersController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Order $order)
     {
         return view('admin.orders.form')->with([
@@ -31,9 +25,6 @@ class OrdersController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Order $order)
     {
         $order->update(['status' => $request->get('status')]);

@@ -36,21 +36,4 @@ class Product extends Model
 
         return $this->price;
     }
-
-//    public static function countProductsInCart() {
-//        $orderId = session('orderId');
-//        $order = Order::find($orderId);
-//
-//        if (is_null(Order::find($orderId))) {
-//            return 0;
-//        }
-//
-//        $sum = 0;
-//
-//        foreach ($order->products as $product) {
-//            $sum += $product->pivot->quantity;
-//        }
-//
-//        return $sum;
-//    }
 }

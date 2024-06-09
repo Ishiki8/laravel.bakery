@@ -11,9 +11,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $products = Product::orderBy('id')->paginate(5);
@@ -23,12 +20,9 @@ class ProductsController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        $categories = Category::get();
+        $categories = Category::orderBy('id')->get();
 
         return view('admin.products.form')->with([
             'form_title' => 'Добавить продукцию',
@@ -36,9 +30,6 @@ class ProductsController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(ProductRequest $request)
     {
         $params = $request->all();
@@ -53,13 +44,9 @@ class ProductsController extends Controller
         return redirect(route('products.index'));
     }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Product $product)
     {
-        $categories = Category::get();
+        $categories = Category::orderBy('id')->get();
 
         return view('admin.products.form')->with([
             'form_title' => 'Редактировать продукцию',
@@ -68,9 +55,6 @@ class ProductsController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(ProductRequest $request, Product $product)
     {
         $params = $request->all();

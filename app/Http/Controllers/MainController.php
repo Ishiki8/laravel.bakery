@@ -9,18 +9,17 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class MainController extends Controller
 {
     public function index() {
-        $categories = Category::orderBy('id')->get();
-
         return view('index')->with([
-            'categories' => $categories,
-            'products' => $this->products(8)
+            'categories' => Category::orderBy('id')->get(),
+            'products' => $this->latestProducts(8)
         ]);
     }
 
-    public function category($id) {
+    public function categoryView($id) {
         $category = Category::where('id', $id)->first();
         $categories = Category::orderBy('id')->get();
         $products = $category->products()->paginate(4);
@@ -32,22 +31,19 @@ class MainController extends Controller
         ]);
     }
 
-    public function products($limit = 0) {
+    public function latestProducts($limit = 0) {
         $products = Product::get()->sortDesc();
         return $limit ? $products->slice(0, $limit) : $products;
     }
 
     public function userOrdersView() {
-        $orders = Order::where('user_id', '=', auth()->id())->get()->sortDesc();
-        $categories = Category::orderBy('id')->get();
-
         return view('auth.user_orders')->with([
-            'orders' => $orders,
-            'categories' => $categories
+            'orders' => Order::where('user_id', '=', auth()->id())->get()->sortDesc(),
+            'categories' => Category::orderBy('id')->get()
         ]);
     }
 
-    public function search() {
+    public function searchView() {
         if (!isset($_GET['search'])) {
             return redirect(route('index'));
         }
@@ -56,7 +52,7 @@ class MainController extends Controller
             ->orWhere('description', 'like', '%' . $_GET['search'] . '%')
             ->paginate(4)->appends(['search' => $_GET['search']]);
 
-        $categories = Category::get();
+        $categories = Category::orderBy('id')->get();
 
         return view('search')->with([
             'products' => $products,
@@ -64,7 +60,7 @@ class MainController extends Controller
         ]);
     }
 
-    public function product($id) {
+    public function productView($id) {
         $product = Product::where('id', $id)->first();
         $categories = Category::orderBy('id')->get();
 
@@ -72,9 +68,5 @@ class MainController extends Controller
             'product' => $product,
             'categories' => $categories
         ]);
-    }
-
-    public function admin() {
-        return view('admin._panel');
     }
 }

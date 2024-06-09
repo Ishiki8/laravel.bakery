@@ -10,9 +10,6 @@ use Illuminate\Support\Str;
 
 class UsersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $users = User::orderBy('id')->paginate(10);
@@ -22,9 +19,6 @@ class UsersController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('admin.users.form')->with([
@@ -32,9 +26,6 @@ class UsersController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(UserRequest $request)
     {
         $params = $request->all();
@@ -51,6 +42,5 @@ class UsersController extends Controller
         User::create($params);
 
         return redirect(route('users.index'));
-
     }
 }

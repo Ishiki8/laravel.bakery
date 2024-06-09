@@ -9,9 +9,6 @@ use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $categories = Category::orderBy('id')->paginate(10);
@@ -21,9 +18,6 @@ class CategoriesController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('admin.categories.form')->with([
@@ -31,18 +25,12 @@ class CategoriesController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(CategoryRequest $request)
     {
         Category::create($request->all());
         return redirect(route('categories.index'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Category $category)
     {
         return view('admin.categories.form')->with([
@@ -51,9 +39,6 @@ class CategoriesController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(CategoryRequest $request, Category $category)
     {
         $category->update($request->all());

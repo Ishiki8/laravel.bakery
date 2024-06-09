@@ -44,7 +44,7 @@
                         <h3 class="total-price"></h3>
                     </div>
                     <div class="d-grid">
-                        <a href="{{ route('cart-confirm') }}" class="btn btn-primary">Перейти к оформлению заказа</a>
+                        <a href="{{ route('checkout') }}" class="btn btn-primary">Перейти к оформлению заказа</a>
                     </div>
                 </div>
             </div>

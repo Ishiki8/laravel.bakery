@@ -15,7 +15,7 @@ class SettingsController extends Controller
 
         return view('auth.user_settings')->with([
             'user' => $user,
-            'categories' => Category::get()
+            'categories' => Category::orderBy('id')->get()
         ]);
     }
 

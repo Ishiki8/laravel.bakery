@@ -18,11 +18,11 @@ class RegistrationController extends Controller
         }
 
         return view('auth.registration')->with([
-            'categories' => Category::get()
+            'categories' => Category::orderBy('id')->get()
         ]);
     }
 
-    public function register(RegistrationRequest $request)
+    public function registration(RegistrationRequest $request)
     {
         if (Auth::check()) {
             return redirect(route('index'));
