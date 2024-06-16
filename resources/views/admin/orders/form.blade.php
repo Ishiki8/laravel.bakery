@@ -15,7 +15,7 @@
             <label for="productSelectCategory" class="form-label">Статус</label>
             <select class="form-select" aria-label="Выберите категорию продукции" id="productSelectCategory" name="status">
                 @foreach(STATUSES as $statusId => $statusTitle)
-                    <option value="{{ $statusId }}" @if($order->status === $statusId) selected @endif>{{ $statusTitle }}</option>
+                    <option value="{{ $statusId }}" @if($order->status === $statusId) selected @endif @if(!in_array($statusId, availableStatuses($order->status))) disabled @endif>{{ $statusTitle }}</option>
                 @endforeach
             </select>
         </div>

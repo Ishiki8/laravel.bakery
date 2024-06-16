@@ -22,3 +22,14 @@ if (!function_exists('phoneToFormat')) {
         );
     }
 }
+
+if (!function_exists('availableStatuses')) {
+    function availableStatuses($status) {
+        return match ($status) {
+            1 => [1, 2, 4],
+            2 => [2, 3, 4],
+            3 => [3],
+            4 => [4],
+        };
+    }
+}
